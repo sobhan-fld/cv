@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const languages = data.languages.join("\n"); // Format array for better display
                     printToTerminal(languages);
                 } else if (params[0] === "--info") {
-                    printToTerminal(`${data.fullName}\n${data.title}\nEmail: ${data.contact.email}\nPhone: ${data.contact.phone}`);
+                    printToTerminal(`${data.fullName}\n${data.title}\nEmail: ${data.contact.email}\n`);
                 } else if (params[0] === "--skills") {
                     const skills = data.skills.join("\n"); // Format array for better display
                     printToTerminal(skills);
