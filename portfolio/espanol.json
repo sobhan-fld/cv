@@ -1,0 +1,65 @@
+{
+    "profilePicture": "profile.png",
+    "fullName": "Sobhan Fooladi Mahani",
+    "title": "Desarrollador Python | IA",
+    "contact": {
+        "email": "sobhan.fld@outlook.com",
+        "address": "España, Barcelona",
+        "dob": "1996",
+        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi-71b407232/"
+    },
+    "objective": [
+        "Desarrollador Python con experiencia en tecnologías impulsadas por IA, procesamiento de señales y desarrollo de software escalable. Experto en la creación de APIs de alta calidad e implementación de modelos de aprendizaje automático para aplicaciones del mundo real.",
+        "Contribuyó a proyectos innovadores de I+D como MAXSENS en Barcelona, España, que obtuvo el Segundo Premio en IoT Solutions 2024 y fue reconocido como la Mejor Startup en la Industria de la Salud. Centrado en la clasificación de señales EMG y optimización de rendimiento en aplicaciones de IA de vanguardia.",
+        "Actualmente cursando una Maestría a tiempo parcial en Telecomunicaciones, ampliando conocimientos en computación avanzada e IA. Apasionado por aprovechar la tecnología para impulsar soluciones e innovaciones impactantes."
+    ],
+    "experience": [
+        {
+            "position": "Desarrollador Backend en Imaz Tech",
+            "location": "Barcelona, España",
+            "period": "Jul 2023 - Presente",
+            "responsibilities": [
+                "Desarrollé y mantuve APIs basadas en Flask para ML y microservicios.",
+                "Mejoré el rendimiento de la aplicación mediante refactorización e indexación.",
+                "Colaboré con equipos de front-end en aplicaciones responsivas.",
+                "Realicé pruebas y depuración para garantizar la fiabilidad.",
+                "Trabajé en MAXSENS, un proyecto de I+D centrado en el procesamiento de señales EMG."
+            ]
+        },
+        {
+            "position": "Ingeniero de Software en SaminCoin",
+            "location": "Karaj, Irán",
+            "period": "Oct 2021 - Ene 2023",
+            "responsibilities": [
+                "Desarrollé sistemas backend con Python y Django.",
+                "Diseñé APIs RESTful para diversas aplicaciones.",
+                "Resolví problemas y optimicé código con equipos multifuncionales.",
+                "Utilicé Git para control de versiones y revisé código del equipo.",
+                "Creé modelos UML y colaboré con equipos de UI/UX."
+            ]
+        }
+    ],
+    "education": [
+        "Maestría en Telecomunicaciones (MATT)(Tiempo parcial), UPC - Feb 2023 - Presente",
+        "Licenciatura en Tecnología de la Información, Universidad Azad de Karaj - Sep 2015 - Ago 2020"
+    ],
+    "skills": [
+        "Programación: Python, Flask, Django, JavaScript, HTML, C#",
+        "Tecnologías: Docker, Git, Visión Artificial, MediaPipe",
+        "IA: Aprendizaje Automático, Aprendizaje Profundo, Procesamiento de Señales",
+        "Otros: Flujo de Documentos, Modelado de Escenarios"
+    ],
+    "languages": [
+        "Inglés: Avanzado, IELTS",
+        "Español: Principiante",
+        "Farsi: Lengua Nativa"
+    ],
+    "translations": {
+        "contact": "Información de Contacto",
+        "objective": "Resumen Profesional",
+        "experience": "Experiencia",
+        "education": "Educación",
+        "skills": "Habilidades",
+        "languages": "Idiomas"
+    }
+}

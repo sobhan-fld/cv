@@ -1,0 +1,254 @@
+/* General Reset */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #ddd;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #1e1e1e, #333);
+    color: #fff;
+    text-align: left;
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #444;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    margin-left: 1rem;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-left: 1rem;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1ca7ec;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #1ca7ec;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1001;
+}
+
+.toggle-button:hover {
+    background-color: #1481b4;
+}
+
+.language-select {
+    position: absolute;
+    top: 20px;
+    right: 140px;
+    background-color: #1ca7ec;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1001;
+}
+
+.burger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #1ca7ec;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.burger-menu:hover {
+    background-color: #1481b4;
+}
+
+.burger-menu.hidden {
+    display: none;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #1e1e1e;
+    padding: 1rem;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1002;
+    transition: left 0.3s ease-in-out;
+}
+
+.menu.open {
+    left: 0;
+}
+
+.menu a {
+    color: #1ca7ec;
+    text-decoration: none;
+    display: block;
+    margin: 1rem 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #62c3f5;
+}
+
+.button-menu-style {
+    display: block;
+    background-color: #1ca7ec;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.close-menu:hover {
+    background-color: #1481b4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+section {
+    background: #2e2e2e;
+    margin: 1rem 0;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode section {
+    background: #fff;
+    color: #333;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #1ca7ec;
+    border-bottom: 2px solid #444;
+    display: inline-block;
+}
+
+body.light-mode .section-title {
+    color: #333;
+    border-bottom: 2px solid #888;
+}
+
+.action-buttons {
+    margin-top: 1rem;
+}
+
+.action-buttons button {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #1ca7ec;
+    color: #fff;
+}
+
+.action-buttons button:hover {
+    background-color: #1481b4;
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #1e1e1e;
+    color: #bbb;
+    margin-top: 2rem;
+    border-top: 2px solid #444;
+}
+
+body.light-mode footer {
+    background: #ddd;
+    color: #333;
+}
+
+a {
+    color: #1ca7ec;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #62c3f5;
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 600px) {
+    header {
+        padding-top: 5rem; /* Adds space for the menu and toggle button */
+        flex-direction: column;
+    }
+
+    .toggle-button,
+    .burger-menu,
+    .language-select {
+        top: 10px;
+    }
+
+    header h1, header p {
+        margin-left: 0;
+        text-align: center;
+    }
+}
