@@ -106,6 +106,14 @@
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
+        #taraImage {
+            display: none;
+            width: 250px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -120,6 +128,7 @@
         </div>
     </div>
     <audio id="valentineSong" src="song.mp3"></audio>
+    <img id="taraImage" src="t.jpg" alt="Tara's Picture">
     <script>
         function openModal() {
             document.getElementById('nameModal').style.display = 'flex';
@@ -131,6 +140,7 @@
                 document.getElementById("message").innerHTML = "Happy Valentine's Day, Tara!<br>❤️";
                 document.getElementById("message").classList.add("visible");
                 document.getElementById("songText").classList.add("visible");
+                document.getElementById("taraImage").style.display = "block";
                 createHeartBurst();
                 document.getElementById("valentineSong").play();
             } else {
