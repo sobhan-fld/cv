@@ -64,6 +64,9 @@ document.addEventListener("DOMContentLoaded", function() {
             case "portfolio":
                 window.open("portfolio/index.html");
                 break;
+            case "tara":
+                window.open("portfolio/vlt.html");
+                break;
             default:
                 printToTerminal(`Command not found: ${cmd}`);
         }
