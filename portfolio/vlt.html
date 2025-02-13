@@ -145,7 +145,10 @@
                 document.getElementById("valentineSong").play();
             } else {
                 document.getElementById("message").innerHTML = "Fuck off, you're not my Valentine!<br>💔";
+                document.getElementById("taraImage").style.display = "none";
+                document.getElementById("songText").classList.remove("visible");
                 document.getElementById("message").classList.add("visible");
+                document.getElementById("valentineSong").pause();
             }
         }
         function createHeart() {
