@@ -1,34 +1,32 @@
 {
     "profilePicture": "profile.png",
     "fullName": "Sobhan Fooladi Mahani",
-    "title": "Python Developer | AI",
+    "title": "DATA ANALYSIS | R&D ENGINEER | PYTHON DEVELOPER",
     "contact": {
-        "email": "sobhan.fld@outlook.com",
+        "email": "fooladi.sobhan@outlook.com",
         "address": "Spain, Barcelona",
         "dob": "1996",
         "linkedin": "https://www.linkedin.com/in/sobhan-fooladi-71b407232/"
     },
     "objective": [
-        "A skilled Python Developer with expertise in AI-driven technologies, signal processing, and scalable software development. Experienced in creating high-quality APIs and implementing machine learning models for real-world applications.",
-        "Contributed to innovative R&D projects like MAXSENS in Barcelona, Spain, which earned the Second Prize in IoT Solutions 2024 and was recognized as the Best Startup in the Health Industry. Focused on EMG signal processing classification and optimizing performance in cutting-edge AI applications.",
-        "Currently pursuing a part-time Master’s in Telecommunications, expanding expertise in advanced computing and AI. Passionate about leveraging technology to drive impactful solutions and innovation."
+        "Master’s student in Deep Learning and Big Data at Universitat Politècnica de Catalunya with hands-onexperience in building data pipelines, deploying machine learning models, and developing backend systems.Delivered real-time EMG signal analysis tools with 94% classification accuracy and improved signalprocessing speed by 30%. Skilled in Python, Flask, and data visualization, with experience developingmicroservices and analytics dashboards. Passionate about combining research, development, and data-driven insights to solve real-world problems. Eager to contribute analytical thinking, technical expertise, andcreativity in a data analyst internship within a collaborative and impact-oriented environment."
     ],
     "experience": [
         {
-            "position": "Backend Developer at Imaz Tech",
-            "location": "Barcelona, Spain",
+            "position": "Backend Developer & R&D Engineer",
+            "location": "Imaz Tech - Barcelona, Spain",
             "period": "Jul 2023 - Present",
             "responsibilities": [
-                "Built and maintained Flask-based APIs for ML and microservices.",
-                "Improved application performance through refactoring and indexing.",
-                "Collaborated with front-end teams on responsive applications.",
-                "Conducted testing and debugging to ensure reliability.",
-                "Worked on MAXSENS, an R&D project focusing on EMG signal processing."
+                "Developed and maintained Flask-based APIs supporting ML pipelines for real-time data processing.",
+                "Applied signal filtering techniques to improve EMG muscle activation accuracy by 30%",
+                "Built AI-driven classification models for motion analysis (achieved 94% accuracy)",
+                "Collaborated with frontend teams to implement data visualizations and system workflows",
+                "Created a dedicated microservice for generating human exercise analytics reports."
             ]
         },
         {
-            "position": "Software Engineer at SaminCoin",
-            "location": "Karaj, Iran",
+            "position": "Software Engineer / Technical Product Owner",
+            "location": "SaminCoin",
             "period": "Oct 2021 - Jan 2023",
             "responsibilities": [
                 "Developed backend systems with Python and Django.",
@@ -40,15 +38,15 @@
         }
     ],
     "education": [
-        "Master's in Telecommunications (MATT)(Part-time), UPC - Feb 2023 - Present",
+        "Master's in Telecommunications (MATT), UPC - Feb 2023 - Present",
         "Bachelor's in Information Technology, Azad University of Karaj - Sep 2015 - Aug 2020"
-
     ],
     "skills": [
-        "Programming: Python, Flask, Django, JavaScript, HTML, C#",
-        "Technologies: Docker, Git, Machine Vision, MediaPipe",
-        "AI: Machine Learning, Deep Learning, Signal Processing",
-        "Other: Document Workflow, Scenario Modeling"
+        "Programming Languages: Python, Bash, JavaScript",
+        "Data Analysis & Machine Learning: Pandas, NumPy, Scikit-learn, Matplotlib, OpenCV, MediaPipe",
+        "Web Development & APIs: Flask, RESTful API design",
+        "Tools & Platforms: Git, Linux, UML Modeling, Jupyter, VS Code",
+        "Other: Document Workflow, Scenario Modeling, performance optimization, software architecture"
     ],
     "languages": [
         "English: Advanced, IELTS",

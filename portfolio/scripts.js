@@ -72,7 +72,7 @@ function toggleMenu() {
 }
 
 document.getElementById("sendEmailButton").addEventListener("click", function() {
-    window.location.href = 'mailto:sobhan.fld@outlook.com';
+    window.location.href = 'mailto:fooladi.sobhan@outlook.com';
 });
 
 function translateTitles(translations) {
