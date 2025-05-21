@@ -1,58 +1,68 @@
 {
     "profilePicture": "profile.png",
     "fullName": "Sobhan Fooladi Mahani",
-    "title": "DATA ANALYSIS | R&D ENGINEER | PYTHON DEVELOPER",
+    "title": "DATA ANALYST | R&D ENGINEER IN AI/ML",
     "contact": {
         "email": "fooladi.sobhan@outlook.com",
-        "address": "Spain, Barcelona",
+        "address": "Barcelona, Spain",
         "dob": "1996",
-        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi/"
+        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi-mahani"
     },
     "objective": [
-        "Master’s student in Deep Learning and Big Data at Universitat Politècnica de Catalunya with hands-onexperience in building data pipelines, deploying machine learning models, and developing backend systems.Delivered real-time EMG signal analysis tools with 94% classification accuracy and improved signalprocessing speed by 30%. Skilled in Python, Flask, and data visualization, with experience developingmicroservices and analytics dashboards. Passionate about combining research, development, and data-driven insights to solve real-world problems. Eager to contribute analytical thinking, technical expertise, andcreativity in a data analyst internship within a collaborative and impact-oriented environment."
+        "Data analyst and R&D engineer with hands-on experience in machine learning, signal processing, and backend development. Built real-time EMG analysis tools with 94% classification accuracy and achieved 30% faster processing through optimized filtering techniques. Proficient in Python, PyTorch, Flask, NumPy, Scikit-learn, and data visualization libraries. Skilled in developing MVPs, deploying ML models, and translating research ideas into functional applications. Eager to contribute to data-driven projects in fast-paced, innovation-oriented teams."
     ],
     "experience": [
         {
-            "position": "Backend Developer & R&D Engineer",
+            "position": "AI & Backend Engineer (R&D – MAXSENS Project)",
             "location": "Imaz Tech - Barcelona, Spain",
             "period": "Jul 2023 - Present",
             "responsibilities": [
-                "Developed and maintained Flask-based APIs supporting ML pipelines for real-time data processing.",
-                "Applied signal filtering techniques to improve EMG muscle activation accuracy by 30%",
-                "Built AI-driven classification models for motion analysis (achieved 94% accuracy)",
-                "Collaborated with frontend teams to implement data visualizations and system workflows",
-                "Created a dedicated microservice for generating human exercise analytics reports."
+                "Developed and maintained Flask-based backend APIs for real-time EMG and motion data processing, enabling intelligent exercise monitoring in MAXSENS.",
+                "Achieved 94% gesture classification accuracy by designing and training CNN and LSTM models tailored for EMG signal patterns.",
+                "Enhanced EMG signal quality by 30% using advanced filtering and preprocessing techniques, improving system stability and responsiveness.",
+                "Built a modular microservice to generate automated analytics reports (CSV, PDF, JPG), reducing manual data handling time by over 60%.",
+                "Collaborated closely with frontend developers to integrate live movement visualizations, direction arrows, and pose correction into the user interface.",
+                "Implemented camera angle detection, user distance guidance, and posture monitoring features, reducing exercise execution errors by 40%.",
+                "Contributed to rapid MVP development cycles, accelerating the deployment of R&D features by 35% through agile workflows and close coordination with product stakeholders."
             ]
         },
         {
-            "position": "Software Engineer / Technical Product Owner",
-            "location": "SaminCoin",
+            "position": "Software Engineer & Technical Product Owner",
+            "location": "SaminCoin - Karaj",
             "period": "Oct 2021 - Jan 2023",
             "responsibilities": [
-                "Developed backend systems with Python and Django.",
-                "Designed RESTful APIs for various applications.",
-                "Troubleshot and optimized code with cross-functional teams.",
-                "Used Git for version control and reviewed team code.",
-                "Created UML models and collaborated with UI/UX teams."
+                "Developed and maintained RESTful APIs using Python and Django, enabling secure and scalable transaction handling for the company’s cryptocurrency platform.",
+                "Created detailed UML diagrams and system designs, reducing miscommunication and accelerating development cycles by 25%.",
+                "Led product roadmap planning and sprint execution, contributing to a 40% reduction in time-to-market for key features and increasing platform responsiveness to user needs.",
+                "Bridged communication between cross-functional teams and stakeholders, ensuring product decisions aligned with both technical feasibility and market demand.",
+                "Collaborated with the UI/UX team to optimize user flows, resulting in a smoother onboarding experience and improved user satisfaction based on early-stage feedback.",
+                "Introduced agile development practices and improved sprint visibility, enabling better prioritization and alignment across engineering and product teams."
             ]
         }
     ],
     "education": [
-        "Master's in Telecommunications (MATT), UPC - Feb 2023 - Present",
-        "Bachelor's in Information Technology, Azad University of Karaj - Sep 2015 - Aug 2020"
+        "Master’s in Telecommunications, Universitat Politècnica de Catalunya (UPC), Spain – Feb 2023 – Present",
+        "Bachelor’s in Information Technology, Azad University of Karaj – Sep 2015 – Aug 2020"
     ],
     "skills": [
         "Programming Languages: Python, Bash, JavaScript",
-        "Data Analysis & Machine Learning: Pandas, NumPy, Scikit-learn, Matplotlib, OpenCV, MediaPipe",
-        "Web Development & APIs: Flask, RESTful API design",
-        "Tools & Platforms: Git, Linux, UML Modeling, Jupyter, VS Code",
-        "Other: Document Workflow, Scenario Modeling, performance optimization, software architecture"
+        "Machine Learning & Data Analysis: PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib, OpenCV, MediaPipe",
+        "Signal Processing: Filtering techniques, feature extraction (RMS, MDF, etc.), real-time EMG processing",
+        "Backend & Web Development: Flask, RESTful API design",
+        "Tools & Platforms: Git, Linux, Jupyter, JetBrains IDEs (e.g., PyCharm)",
+        "Concepts & Techniques: Deep learning, supervised learning, classification, NLP, CNNs, LSTMs, data visualization, MVP development, software architecture",
+        "Other: UML modeling, performance optimization, document workflow automation"
     ],
     "languages": [
-        "English: Advanced, IELTS",
-        "Spanish: Beginner",
-        "Farsi: Native Language"
+        "English: Fluent (IELTS Certified)",
+        "Spanish: A1 – Beginner",
+        "Farsi: Native"
     ],
+    "additionalInfo": {
+        "workAuthorization": "Eligible to work and intern in Spain (LAY14 – Investigator visa)",
+        "portfolio": "https://sobhan-fld.github.io/cv/",
+        "interests": "Real-world AI applications, signal processing, development and coding, creative prototyping, video games, reading mystery novels, tech philosophy, problem-solving challenges"
+    },
     "translations": {
         "contact": "Contact Information",
         "objective": "Professional Summary",

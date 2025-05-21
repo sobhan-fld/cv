@@ -1,58 +1,68 @@
 {
     "profilePicture": "profile.png",
     "fullName": "Sobhan Fooladi Mahani",
-    "title": "ANÁLISIS DE DATOS | INGENIERO I+D | DESARROLLADOR PYTHON",
+    "title": "ANALISTA DE DATOS | INGENIERO DE I+D EN IA/ML",
     "contact": {
         "email": "fooladi.sobhan@outlook.com",
-        "address": "España, Barcelona",
+        "address": "Barcelona, España",
         "dob": "1996",
-        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi/"
+        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi-mahani"
     },
     "objective": [
-        "Estudiante de máster en Deep Learning y Big Data en la Universitat Politècnica de Catalunya con experiencia práctica en la construcción de pipelines de datos, despliegue de modelos de aprendizaje automático y desarrollo de sistemas backend. Desarrolló herramientas de análisis de señales EMG en tiempo real con un 94% de precisión en la clasificación y mejoró la velocidad de procesamiento de señales en un 30%. Hábil en Python, Flask y visualización de datos, con experiencia en el desarrollo de microservicios y paneles analíticos. Apasionado por combinar la investigación, el desarrollo y el análisis de datos para resolver problemas del mundo real. Con ganas de aportar pensamiento analítico, experiencia técnica y creatividad en una pasantía como analista de datos dentro de un entorno colaborativo y orientado al impacto."
+        "Analista de datos e ingeniero de I+D con experiencia práctica en aprendizaje automático, procesamiento de señales y desarrollo backend. Construyó herramientas de análisis de EMG en tiempo real con un 94 % de precisión de clasificación y logró un procesamiento un 30 % más rápido mediante técnicas de filtrado optimizadas. Dominio de Python, PyTorch, Flask, NumPy, Scikit-learn y bibliotecas de visualización de datos. Experiencia en el desarrollo de MVPs, despliegue de modelos de ML y traducción de ideas de investigación en aplicaciones funcionales. Motivado por contribuir a proyectos basados en datos en equipos dinámicos y orientados a la innovación."
     ],
     "experience": [
         {
-            "position": "Desarrollador Backend e Ingeniero de I+D",
+            "position": "Ingeniero de IA y Backend (I+D – Proyecto MAXSENS)",
             "location": "Imaz Tech - Barcelona, España",
             "period": "Jul 2023 - Presente",
             "responsibilities": [
-                "Desarrolló y mantuvo APIs basadas en Flask que soportan pipelines de ML para procesamiento de datos en tiempo real.",
-                "Aplicó técnicas de filtrado de señales para mejorar la precisión de activación muscular EMG en un 30%.",
-                "Construyó modelos de clasificación impulsados por IA para análisis de movimiento (logró un 94% de precisión).",
-                "Colaboró con equipos frontend para implementar visualizaciones de datos y flujos de trabajo del sistema.",
-                "Creó un microservicio dedicado a generar informes analíticos de ejercicios humanos."
+                "Desarrolló y mantuvo APIs backend con Flask para el procesamiento en tiempo real de datos de EMG y movimiento, permitiendo el monitoreo inteligente de ejercicios en MAXSENS.",
+                "Logró un 94 % de precisión en la clasificación de gestos mediante el diseño y entrenamiento de modelos CNN y LSTM adaptados a señales EMG.",
+                "Mejoró la calidad de las señales EMG en un 30 % mediante técnicas avanzadas de filtrado y preprocesamiento, aumentando la estabilidad y respuesta del sistema.",
+                "Construyó un microservicio modular para generar informes analíticos automatizados (CSV, PDF, JPG), reduciendo en más del 60 % el tiempo de manejo manual de datos.",
+                "Colaboró estrechamente con desarrolladores frontend para integrar visualizaciones en vivo, flechas de dirección y corrección de postura en la interfaz de usuario.",
+                "Implementó funciones de detección de ángulo de cámara, distancia del usuario y monitoreo de postura, reduciendo los errores de ejecución de ejercicios en un 40 %.",
+                "Contribuyó a ciclos rápidos de desarrollo de MVPs, acelerando el despliegue de funciones de I+D en un 35 % mediante metodologías ágiles y coordinación con stakeholders."
             ]
         },
         {
-            "position": "Ingeniero de Software / Product Owner Técnico",
-            "location": "SaminCoin",
+            "position": "Ingeniero de Software y Product Owner Técnico",
+            "location": "SaminCoin - Karaj",
             "period": "Oct 2021 - Ene 2023",
             "responsibilities": [
-                "Desarrolló sistemas backend con Python y Django.",
-                "Diseñó APIs RESTful para diversas aplicaciones.",
-                "Solucionó problemas y optimizó código junto a equipos multidisciplinarios.",
-                "Usó Git para control de versiones y revisión de código del equipo.",
-                "Creó modelos UML y colaboró con equipos de UI/UX."
+                "Desarrolló y mantuvo APIs RESTful usando Python y Django, permitiendo el manejo seguro y escalable de transacciones en la plataforma de criptomonedas.",
+                "Creó diagramas UML y diseños de sistemas detallados, reduciendo la mala comunicación y acelerando los ciclos de desarrollo en un 25 %.",
+                "Lideró la planificación del roadmap de producto y la ejecución de sprints, contribuyendo a reducir el tiempo de lanzamiento de funciones en un 40 %.",
+                "Facilitó la comunicación entre equipos técnicos y stakeholders para asegurar la viabilidad técnica y alineación del producto con el mercado.",
+                "Colaboró con el equipo UI/UX para optimizar los flujos de usuario, mejorando la experiencia de incorporación y la satisfacción de los usuarios.",
+                "Introdujo prácticas ágiles y mayor visibilidad en los sprints, permitiendo una mejor priorización y alineación en todo el equipo técnico."
             ]
         }
     ],
     "education": [
-        "Máster en Telecomunicaciones (MATT), UPC - Feb 2023 - Presente",
-        "Grado en Tecnologías de la Información, Universidad Azad de Karaj - Sep 2015 - Ago 2020"
+        "Máster en Telecomunicaciones, Universitat Politècnica de Catalunya (UPC), España – Feb 2023 – Presente",
+        "Grado en Tecnologías de la Información, Universidad Azad de Karaj – Sep 2015 – Ago 2020"
     ],
     "skills": [
         "Lenguajes de Programación: Python, Bash, JavaScript",
-        "Análisis de Datos y Aprendizaje Automático: Pandas, NumPy, Scikit-learn, Matplotlib, OpenCV, MediaPipe",
-        "Desarrollo Web y APIs: Flask, diseño de API RESTful",
-        "Herramientas y Plataformas: Git, Linux, Modelado UML, Jupyter, VS Code",
-        "Otros: Flujo de trabajo de documentos, modelado de escenarios, optimización de rendimiento, arquitectura de software"
+        "Análisis de Datos y Aprendizaje Automático: PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib, OpenCV, MediaPipe",
+        "Procesamiento de Señales: Técnicas de filtrado, extracción de características (RMS, MDF, etc.), procesamiento EMG en tiempo real",
+        "Desarrollo Web y Backend: Flask, diseño de APIs RESTful",
+        "Herramientas y Plataformas: Git, Linux, Jupyter, IDEs JetBrains (por ejemplo, PyCharm)",
+        "Conceptos y Técnicas: Aprendizaje profundo, aprendizaje supervisado, clasificación, PLN, CNNs, LSTMs, visualización de datos, desarrollo de MVPs, arquitectura de software",
+        "Otros: Modelado UML, optimización de rendimiento, automatización de flujo documental"
     ],
     "languages": [
-        "Inglés: Avanzado, IELTS",
-        "Español: Principiante",
-        "Persa: Lengua materna"
+        "Inglés: Fluido (Certificado IELTS)",
+        "Español: A1 – Principiante",
+        "Persa (Farsi): Nativo"
     ],
+    "additionalInfo": {
+        "workAuthorization": "Autorizado para trabajar y hacer prácticas en España (LAY14 – Visa de Investigador)",
+        "portfolio": "https://sobhan-fld.github.io/cv/",
+        "interests": "Aplicaciones reales de IA, procesamiento de señales, desarrollo y programación, creación de prototipos, videojuegos, lectura de novelas de misterio, filosofía tecnológica, retos de resolución de problemas"
+    },
     "translations": {
         "contact": "Información de Contacto",
         "objective": "Resumen Profesional",
