@@ -3,14 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Terminal CV</title>
+    <title>Sobhan Fooladi Mahani - 3D CV</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="terminal-mode">
-    <div id="terminal">
-        <div id="output"></div>
-        <input id="input" type="text" autofocus autocomplete="off" placeholder="Enter command...">
+<body>
+    <!-- 3D Canvas Container -->
+    <canvas id="canvas3d"></canvas>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+        </div>
+        <p class="loading-text">Loading 3D Experience...</p>
     </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress-bar">
+        <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+    </div>
+
+    <!-- Section Indicators -->
+    <div class="section-indicators">
+        <div class="indicator active" data-section="0"></div>
+        <div class="indicator" data-section="1"></div>
+        <div class="indicator" data-section="2"></div>
+        <div class="indicator" data-section="3"></div>
+        <div class="indicator" data-section="4"></div>
+        <div class="indicator" data-section="5"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-section="0">Home</a>
+            <a href="#" class="nav-link" data-section="1">About</a>
+            <a href="#" class="nav-link" data-section="2">Experience</a>
+            <a href="#" class="nav-link" data-section="3">Skills</a>
+            <a href="#" class="nav-link" data-section="4">Education</a>
+            <a href="#" class="nav-link" data-section="5">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Container - Single Page with Stacked Sections -->
+    <main class="content-container" id="contentContainer">
+        <!-- Hero Section -->
+        <section class="content-section visible" data-section="0">
+            <div class="section-content-wrapper">
+                <div class="hero-content">
+                    <div class="profile-container">
+                        <div class="profile-image-wrapper">
+                            <img src="assets/profile.png" alt="Profile" class="profile-image" id="profileImage">
+                            <div class="profile-glow"></div>
+                        </div>
+                    </div>
+                    <h1 class="hero-title" id="heroName">
+                        <span class="title-line">Sobhan</span>
+                        <span class="title-line">Fooladi Mahani</span>
+                    </h1>
+                    <p class="hero-subtitle" id="heroTitle">DATA ANALYST | R&D ENGINEER IN AI/ML</p>
+                    <div class="hero-description" id="heroDescription">
+                        Crafting intelligent solutions through machine learning, signal processing, and backend development
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary scroll-to-section" data-target="5">Get In Touch</a>
+                        <a href="assets/Sobhan_Fooladi_Mahani_CV.pdf" target="_blank" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="content-section" data-section="1">
+            <div class="section-content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="section-content">
+                    <div class="about-card">
+                        <p class="about-text" id="aboutText"></p>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">94%</div>
+                                <div class="stat-label">Classification Accuracy</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">30%</div>
+                                <div class="stat-label">Faster Processing</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">2+</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Passion Driven</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="content-section" data-section="2">
+            <div class="section-content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="section-content">
+                    <div class="timeline" id="experienceTimeline"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="content-section" data-section="3">
+            <div class="section-content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">Skills & Technologies</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="section-content">
+                    <div class="skills-grid" id="skillsGrid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="content-section" data-section="4">
+            <div class="section-content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">Education</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="section-content">
+                    <div class="education-list" id="educationList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="content-section" data-section="5">
+            <div class="section-content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="section-content">
+                    <div class="contact-card">
+                        <div class="contact-info" id="contactInfo"></div>
+                        <div class="contact-actions" id="contactActions"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Sobhan Fooladi Mahani. Crafted with passion and Three.js</p>
+    </footer>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Main Script -->
     <script src="scripts.js"></script>
 </body>
 </html>

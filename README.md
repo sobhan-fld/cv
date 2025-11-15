@@ -1,52 +1,67 @@
-# Personal CV Website
+# 3D Interactive CV
+
+A stunning 3D interactive CV website built with Three.js, featuring particle effects, floating 3D objects, and smooth animations.
 
 ## Overview
-This is my personal CV, and you can check it out [here](https://sobhan-fld.github.io/cv/).
-This repository contains the source code for a personal CV website. It is designed to present a professional profile, including work experience, skills, and other relevant information. The website is developed using HTML, CSS, and JavaScript, with multilingual support in English and Spanish.
+This is my personal CV website with a modern 3D interface. You can check it out [here](https://sobhan-fld.github.io/cv/).
 
 ## Features
-- **Responsive Design**: The website is mobile-friendly and adjusts well to different screen sizes.
-- **Multilingual Support**: Content is available in both English and Spanish through JSON files.
-- **Modern UI**: Styled using CSS for a clean, modern look.
-- **Interactive Elements**: JavaScript is used to add interactivity to the page.
+- **3D Interactive Experience**: Particle system and floating 3D geometric shapes
+- **Responsive Design**: Mobile-friendly and adjusts to different screen sizes
+- **Smooth Animations**: Scroll-triggered animations and transitions
+- **Modern UI**: Glassmorphism effects and gradient designs
+- **Multilingual Support**: Content available in English and Spanish through JSON files
 
 ## File Structure
-- **index.html**: The main HTML file for the website, which contains the structure of the CV.
-- **styles.css**: This file includes all the styles used to give the website its look and feel.
-- **scripts.js**: Contains JavaScript code to handle interactive functionalities, such as language switching.
-- **english.json** and **espanol.json**: JSON files storing content in English and Spanish, allowing for easy localization.
-- **profile.png**: A profile picture used in the CV.
+```
+cv/
+├── index.html          # Main HTML file
+├── styles.css          # Styles and animations
+├── scripts.js          # Three.js 3D scene and interactions
+├── english.json        # English content
+├── espanol.json        # Spanish content (if needed)
+├── assets/
+│   ├── cv.pdf          # PDF version of CV
+│   └── profile.png     # Profile picture
+└── README.md
+```
 
 ## Setup Instructions
 
 ### Prerequisites
-- A modern web browser (e.g., Chrome, Firefox, Edge).
-- Optional: A web server to host the files for online use.
+- A modern web browser (Chrome, Firefox, Edge)
+- A local web server (for development)
 
-### Running the Website
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/sobhan-fld/cv.git
-   ```
-2. Navigate to the directory:
-   ```bash
-   cd cv
-   ```
-3. Open **index.html** in your preferred web browser.
-4. To host the website, you can upload the files to any web server or use GitHub Pages to serve it.
+### Running Locally
 
-## Multilingual Support
-- The website provides language options via the **english.json** and **espanol.json** files.
-- JavaScript is used to dynamically load content based on the user's selection, making it easy to switch between languages.
+**Using Python (PowerShell):**
+```powershell
+cd C:\Users\sobha\Code\cv
+python -m http.server 8000
+```
+Then open `http://localhost:8000` in your browser.
 
-## Deployment
-- This website can be hosted on GitHub Pages by enabling it in the repository settings.
-- The live version of the website is available [here](https://sobhan-fld.github.io/cv/).
+**Using Node.js:**
+```bash
+npx http-server -p 8000
+```
+
+**Using VS Code:**
+- Install the "Live Server" extension
+- Right-click on `index.html` and select "Open with Live Server"
 
 ## Customization
-- To update the content, modify the **english.json** and **espanol.json** files with your information.
-- You can also replace **profile.png** with your own picture.
-- CSS and JavaScript can be customized to change the website's style and behavior.
+- Update content in `english.json` and `espanol.json`
+- Replace `assets/profile.png` with your picture
+- Modify `assets/cv.pdf` with your CV PDF
+- Customize colors in `styles.css` (CSS variables at the top)
+- Adjust 3D effects in `scripts.js`
+
+## Technologies Used
+- Three.js for 3D graphics
+- GSAP for animations
+- Vanilla JavaScript
+- CSS3 with Glassmorphism effects
 
 ## License
 This project is available under the [MIT License](LICENSE).
