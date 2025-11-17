@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobhan Fooladi Mahani - 3D CV</title>
+    <title>Sobhan Fooladi Mahani - Portfolio CV</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,12 +15,24 @@
     
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="loader">
-            <div class="loader-ring"></div>
-            <div class="loader-ring"></div>
-            <div class="loader-ring"></div>
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-button terminal-button-close"></span>
+                    <span class="terminal-button terminal-button-minimize"></span>
+                    <span class="terminal-button terminal-button-maximize"></span>
+                </div>
+                <div class="terminal-title">portfolio@cv:~</div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line" id="terminalLine1"></div>
+                <div class="terminal-line" id="terminalLine2"></div>
+                <div class="terminal-line" id="terminalLine3"></div>
+                <div class="terminal-line" id="terminalLine4">
+                    <span class="terminal-cursor">_</span>
+                </div>
+            </div>
         </div>
-        <p class="loading-text">Loading 3D Experience...</p>
     </div>
 
     <!-- Scroll Progress Indicator -->
@@ -49,6 +61,9 @@
             <a href="#" class="nav-link" data-section="5">Contact</a>
         </div>
         <div class="nav-actions">
+            <button class="language-toggle" id="languageToggle" aria-label="Toggle language">
+                <span class="language-text">EN</span>
+            </button>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <span class="theme-icon">🌙</span>
             </button>
@@ -179,7 +194,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Sobhan Fooladi Mahani. Crafted with passion and Three.js</p>
+        <p>&copy; 2024 Sobhan Fooladi Mahani. Crafted with passion</p>
     </footer>
 
     <!-- Three.js Library -->

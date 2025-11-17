@@ -1,67 +1,91 @@
 {
     "profilePicture": "profile.png",
     "fullName": "Sobhan Fooladi Mahani",
-    "title": "DATA ANALYST | R&D ENGINEER IN AI/ML",
+    "title": "AI & DEEP LEARNING ENGINEER | ML RESEARCHER & R&D",
     "contact": {
         "email": "fooladi.sobhan@outlook.com",
         "address": "Barcelona, Spain",
         "dob": "1996",
-        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi-mahani"
+        "linkedin": "https://www.linkedin.com/in/sobhan-fooladi-mahani",
+        "github": "https://github.com/sobhan-fld"
     },
     "objective": [
-        "Data analyst and R&D engineer with hands-on experience in machine learning, signal processing, and backend development. Built real-time EMG analysis tools with 94% classification accuracy and achieved 30% faster processing through optimized filtering techniques. Proficient in Python, PyTorch, Flask, NumPy, Scikit-learn, and data visualization libraries. Skilled in developing MVPs, deploying ML models, and translating research ideas into functional applications. Eager to contribute to data-driven projects in fast-paced, innovation-oriented teams."
+        "AI & Deep Learning Engineer with experience building end-to-end ML systems, deploying multilingual LLM pipelines, and developing efficient deep learning models for real-world applications. Strong background in NLP/LLMs, PyTorch-based model development, and ML pipeline engineering across cloud and edge environments. Currently conducting master thesis research at CTTC on energy and performance profiling of deep learning models across heterogeneous hardware. Motivated to work in research, ML engineering, and R&D roles combining deep learning, efficiency, and practical deployment."
     ],
     "experience": [
         {
-            "position": "AI & Backend Engineer (R&D – MAXSENS Project)",
-            "location": "Imaz Tech - Barcelona, Spain",
-            "period": "Jul 2023 - Present",
+            "position": "Master Thesis Researcher – Sustainable AI (SAI) – Part time",
+            "location": "CTTC – Centre Tecnològic de Telecomunicacions de Catalunya, Barcelona",
+            "period": "Oct 2025 – Present",
             "responsibilities": [
-                "Developed and maintained Flask-based backend APIs for real-time EMG and motion data processing, enabling intelligent exercise monitoring in MAXSENS.",
-                "Achieved 94% gesture classification accuracy by designing and training CNN and LSTM models tailored for EMG signal patterns.",
-                "Enhanced EMG signal quality by 30% using advanced filtering and preprocessing techniques, improving system stability and responsiveness.",
-                "Built a modular microservice to generate automated analytics reports (CSV, PDF, JPG), reducing manual data handling time by over 60%.",
-                "Collaborated closely with frontend developers to integrate live movement visualizations, direction arrows, and pose correction into the user interface.",
-                "Implemented camera angle detection, user distance guidance, and posture monitoring features, reducing exercise execution errors by 40%.",
-                "Contributed to rapid MVP development cycles, accelerating the deployment of R&D features by 35% through agile workflows and close coordination with product stakeholders."
+                "Conducting research on energy-efficient deep learning, profiling training/inference costs and CO2 emissions across heterogeneous hardware (Jetson Nano, laptop GPUs, server nodes).",
+                "Benchmarking CNN, LSTM/GRU, and contrastive learning models for image and time-series tasks under diverse training settings.",
+                "Designing measurement campaigns using CodeCarbon and CarbonTracker to evaluate GPU/CPU/RAM usage and energy scaling behavior.",
+                "Deploying models on edge devices to study runtime constraints, memory limits, and batch-size effects.",
+                "Exploring optimization techniques (contrastive learning, reservoir computing, coreset selection) to reduce model training cost while maintaining accuracy.",
+                "Developed an internal tool at CTTC to automate model training pipelines and track energy use/CO2 emissions during experiments. GitHub: https://github.com/sobhan-fld/SustainVision"
+            ]
+        },
+        {
+            "position": "AI & NLP Engineer (Freelance)",
+            "location": "Moodest, Techno Campus, Mataró, Barcelona",
+            "period": "Apr 2025 – Present",
+            "responsibilities": [
+                "Developed multilingual LLM and NLP pipelines (Catalan/Spanish/English) for workplace well-being and communication analytics.",
+                "Hosted Llama 3.2 models on Hugging Face AWS Inference Endpoints and integrated them into Moodest’s production NLP pipeline with automated context handling and agent routing.",
+                "Designed agent-based orchestration and context-management modules improving processing accuracy and reasoning reliability.",
+                "Achieved 96% message filtering accuracy and 91% engagement-score prediction using transformer embeddings combined with XGBoost models.",
+                "Built privacy-compliant preprocessing and production-ready REST APIs powering Moodest’s in-house AI services."
+            ]
+        },
+        {
+            "position": "AI & Backend Engineer (R&D – MAXSENS Project) – Full time",
+            "location": "Imaz Tech – Barcelona, Spain",
+            "period": "Aug 2023 – Aug 2025",
+            "responsibilities": [
+                "Developed Flask-based backend APIs for real-time EMG and motion data processing, enabling scalable modular AI pipelines.",
+                "Built CNN and LSTM models achieving 94% gesture classification accuracy on high-dimensional physiological signals.",
+                "Improved signal-processing efficiency by 30% through optimized filtering and feature extraction workflows.",
+                "Automated analytics report generation (CSV, PDF, JPG), reducing manual handling by over 60%.",
+                "Implemented posture and motion detection features that reduced exercise execution errors by 40%.",
+                "Collaborated with clinical and product teams to align ML outputs with real-world use cases."
             ]
         },
         {
             "position": "Software Engineer & Technical Product Owner",
-            "location": "SaminCoin - Karaj",
-            "period": "Oct 2021 - Jan 2023",
+            "location": "SaminCoin – Tehran",
+            "period": "Oct 2021 – Dec 2022",
             "responsibilities": [
-                "Developed and maintained RESTful APIs using Python and Django, enabling secure and scalable transaction handling for the company’s cryptocurrency platform.",
-                "Created detailed UML diagrams and system designs, reducing miscommunication and accelerating development cycles by 25%.",
-                "Led product roadmap planning and sprint execution, contributing to a 40% reduction in time-to-market for key features and increasing platform responsiveness to user needs.",
-                "Bridged communication between cross-functional teams and stakeholders, ensuring product decisions aligned with both technical feasibility and market demand.",
-                "Collaborated with the UI/UX team to optimize user flows, resulting in a smoother onboarding experience and improved user satisfaction based on early-stage feedback.",
+                "Designed and maintained RESTful APIs in Python/Django for fraud detection and transaction classification on a cryptocurrency platform.",
+                "Created detailed UML diagrams and system designs, improving cross-team communication and reducing development cycle times by 25%.",
+                "Led product roadmap planning and sprint execution, contributing to a 40% reduction in time-to-market for key features.",
+                "Worked closely with UI/UX teams to optimize onboarding workflows, improving early user experience and satisfaction.",
                 "Introduced agile development practices and improved sprint visibility, enabling better prioritization and alignment across engineering and product teams."
             ]
         }
     ],
     "education": [
-        "Master’s in Telecommunications, Universitat Politècnica de Catalunya (UPC), Spain – Feb 2023 – Present",
-        "Bachelor’s in Information Technology, Azad University of Karaj – Sep 2015 – Aug 2020"
+        "Master’s in Telecommunications – Deep Learning for Multimedia Processing Specialization, Universitat Politècnica de Catalunya (UPC), Barcelona – 2023 – 2025",
+        "Bachelor’s in Information Technology Engineering, Azad University, Karaj – 2015 – 2020"
     ],
     "skills": [
-        "Programming Languages: Python, Bash, JavaScript",
-        "Machine Learning & Data Analysis: PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib, OpenCV, MediaPipe",
-        "Signal Processing: Filtering techniques, feature extraction (RMS, MDF, etc.), real-time EMG processing",
-        "Backend & Web Development: Flask, RESTful API design",
-        "Tools & Platforms: Git, Linux, Jupyter, JetBrains IDEs (e.g., PyCharm)",
-        "Concepts & Techniques: Deep learning, supervised learning, classification, NLP, CNNs, LSTMs, data visualization, MVP development, software architecture",
-        "Other: UML modeling, performance optimization, document workflow automation"
+        "Programming Languages: Python, Bash",
+        "Deep Learning & Machine Learning: PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib, CNNs, LSTMs/GRUs, transfer learning, contrastive learning, self-supervised learning, model evaluation",
+        "NLP & LLMs: Hugging Face pipelines, multilingual LLM integration, Llama models, embeddings, text classification, sentiment and topic modeling",
+        "Energy & Performance Profiling: CodeCarbon, GPU/CPU/RAM profiling, efficiency analysis across edge and server devices",
+        "Backend & Infrastructure: Flask APIs, RESTful services, AWS Lambda/API Gateway/S3, Dockerized endpoints, Linux systems, microservice workflow design",
+        "Tools & Platforms: Git, Linux, Jupyter, JetBrains IDEs (e.g., PyCharm), VS Code, Google Colab",
+        "Concepts & Techniques: Deep learning, supervised and self-supervised learning, time-series analysis, model deployment, cloud deployment, model optimization, data pipelines, experimental design, reproducible workflows"
     ],
     "languages": [
-        "English: Fluent (IELTS Certified)",
+        "English: Fluent",
         "Spanish: A1 – Beginner",
         "Farsi: Native"
     ],
     "additionalInfo": {
-        "workAuthorization": "Eligible to work and intern in Spain (LAY14 – Investigator visa)",
+        "workAuthorization": "Eligible to work and intern in Spain",
         "portfolio": "https://sobhan-fld.github.io/cv/",
-        "interests": "Real-world AI applications, signal processing, development and coding, creative prototyping, video games, reading mystery novels, tech philosophy, problem-solving challenges"
+        "interests": "Deep learning research, LLM systems, efficient ML, edge AI, signal analysis, development and coding, creative prototyping, video games, reading mystery novels, tech philosophy, problem-solving challenges"
     },
     "translations": {
         "contact": "Contact Information",

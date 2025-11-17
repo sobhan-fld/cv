@@ -1,14 +1,17 @@
 // CV Data
 let cvData = null;
+let currentLanguage = 'en';
 
 // Load CV data
-async function loadCVData() {
+async function loadCVData(lang = 'en') {
     try {
-        const response = await fetch('english.json');
+        const fileName = lang === 'es' ? 'espanol.json' : 'english.json';
+        const response = await fetch(fileName);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         cvData = await response.json();
+        currentLanguage = lang;
         console.log('CV data loaded:', cvData);
         console.log('Experience data:', cvData.experience);
         console.log('Skills data:', cvData.skills);
@@ -16,9 +19,44 @@ async function loadCVData() {
         // Wait a bit for DOM to be fully ready, then populate
         setTimeout(() => {
             populateContent();
+            updateNavigationLabels();
         }, 100);
     } catch (error) {
         console.error('Error loading CV data:', error);
+    }
+}
+
+// Update navigation labels based on language
+function updateNavigationLabels() {
+    if (!cvData || !cvData.translations) return;
+    
+    const navLinks = document.querySelectorAll('.nav-link');
+    const translations = cvData.translations;
+    
+    // Update nav links if translations exist
+    if (navLinks.length >= 6) {
+        navLinks[0].textContent = currentLanguage === 'es' ? 'Inicio' : 'Home';
+        navLinks[1].textContent = translations.objective || 'About';
+        navLinks[2].textContent = translations.experience || 'Experience';
+        navLinks[3].textContent = translations.skills || 'Skills';
+        navLinks[4].textContent = translations.education || 'Education';
+        navLinks[5].textContent = translations.contact || 'Contact';
+    }
+    
+    // Update section titles
+    const sectionTitles = document.querySelectorAll('.section-title');
+    if (sectionTitles.length >= 5) {
+        sectionTitles[0].textContent = translations.objective || 'About Me';
+        sectionTitles[1].textContent = translations.experience || 'Experience';
+        sectionTitles[2].textContent = translations.skills || 'Skills & Technologies';
+        sectionTitles[3].textContent = translations.education || 'Education';
+        sectionTitles[4].textContent = translations.contact || 'Get In Touch';
+    }
+    
+    // Update hero button
+    const getInTouchBtn = document.querySelector('.scroll-to-section');
+    if (getInTouchBtn) {
+        getInTouchBtn.textContent = currentLanguage === 'es' ? 'Contactar' : 'Get In Touch';
     }
 }
 
@@ -74,17 +112,76 @@ function initThreeJS() {
     // Start animation
     animate();
 
-    // Hide loading screen after a delay (with error handling)
-    setTimeout(() => {
-        try {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.classList.add('hidden');
-            }
-        } catch (error) {
-            console.error('Error hiding loading screen:', error);
+    // Start terminal loading animation
+    startTerminalAnimation();
+}
+
+// Terminal Loading Animation
+function startTerminalAnimation() {
+    const messages = [
+        'loading portfolio...',
+        'initializing systems...',
+        'loading experience data...',
+        'ready'
+    ];
+    
+    let currentMessageIndex = 0;
+    let currentCharIndex = 0;
+    
+    const line1 = document.getElementById('terminalLine1');
+    const line2 = document.getElementById('terminalLine2');
+    const line3 = document.getElementById('terminalLine3');
+    const line4 = document.getElementById('terminalLine4');
+    
+    if (!line1 || !line2 || !line3 || !line4) return;
+    
+    function typeMessage() {
+        if (currentMessageIndex >= messages.length) {
+            // All messages typed, hide loading screen
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 800);
+            return;
         }
-    }, 1500);
+        
+        const currentLine = currentMessageIndex === 0 ? line1 : 
+                           currentMessageIndex === 1 ? line2 :
+                           currentMessageIndex === 2 ? line3 : line4;
+        
+        if (!currentLine) {
+            currentMessageIndex++;
+            setTimeout(typeMessage, 300);
+            return;
+        }
+        
+        const currentMessage = messages[currentMessageIndex];
+        
+        if (currentCharIndex < currentMessage.length) {
+            // Remove cursor from current line if it exists
+            const cursor = currentLine.querySelector('.terminal-cursor');
+            if (cursor) {
+                cursor.remove();
+            }
+            
+            currentLine.textContent = currentMessage.substring(0, currentCharIndex + 1);
+            currentLine.classList.add('has-content');
+            currentCharIndex++;
+            setTimeout(typeMessage, 50 + Math.random() * 30);
+        } else {
+            // Message complete, move to next
+            currentMessageIndex++;
+            currentCharIndex = 0;
+            setTimeout(typeMessage, 400);
+        }
+    }
+    
+    // Start typing after a short delay
+    setTimeout(() => {
+        typeMessage();
+    }, 300);
 }
 
 function createParticleSystem() {
@@ -601,6 +698,37 @@ function initScrollAnimations() {
     });
 }
 
+// Language Management
+function initLanguage() {
+    // Check for saved language preference or default to English
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    currentLanguage = savedLanguage;
+    
+    // Update language toggle button
+    updateLanguageButton(savedLanguage);
+    
+    // Language toggle button
+    const languageToggle = document.getElementById('languageToggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', () => {
+            const newLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            currentLanguage = newLanguage;
+            localStorage.setItem('language', newLanguage);
+            updateLanguageButton(newLanguage);
+            
+            // Reload CV data with new language
+            loadCVData(newLanguage);
+        });
+    }
+}
+
+function updateLanguageButton(lang) {
+    const languageText = document.querySelector('.language-text');
+    if (languageText) {
+        languageText.textContent = lang === 'es' ? 'ES' : 'EN';
+    }
+}
+
 // Theme Management
 function initTheme() {
     // Check for saved theme preference or default to dark
@@ -683,8 +811,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize theme first
         initTheme();
         
-        // Load CV data
-        loadCVData();
+        // Initialize language
+        initLanguage();
+        
+        // Load CV data with saved language preference
+        const savedLanguage = localStorage.getItem('language') || 'en';
+        loadCVData(savedLanguage);
 
         // Initialize Three.js
         initThreeJS();
@@ -703,13 +835,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             update3DSceneTheme(currentTheme);
         }, 100);
+        
+        // Note: Loading screen is hidden by terminal animation
     } catch (error) {
         console.error('Initialization error:', error);
         // Make sure loading screen is hidden even on error
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-        }
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+            }
+        }, 2000);
     }
 });
 
