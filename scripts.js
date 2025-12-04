@@ -111,77 +111,6 @@ function initThreeJS() {
 
     // Start animation
     animate();
-
-    // Start terminal loading animation
-    startTerminalAnimation();
-}
-
-// Terminal Loading Animation
-function startTerminalAnimation() {
-    const messages = [
-        'loading portfolio...',
-        'initializing systems...',
-        'loading experience data...',
-        'ready'
-    ];
-    
-    let currentMessageIndex = 0;
-    let currentCharIndex = 0;
-    
-    const line1 = document.getElementById('terminalLine1');
-    const line2 = document.getElementById('terminalLine2');
-    const line3 = document.getElementById('terminalLine3');
-    const line4 = document.getElementById('terminalLine4');
-    
-    if (!line1 || !line2 || !line3 || !line4) return;
-    
-    function typeMessage() {
-        if (currentMessageIndex >= messages.length) {
-            // All messages typed, hide loading screen
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loading-screen');
-                if (loadingScreen) {
-                    loadingScreen.classList.add('hidden');
-                }
-            }, 800);
-            return;
-        }
-        
-        const currentLine = currentMessageIndex === 0 ? line1 : 
-                           currentMessageIndex === 1 ? line2 :
-                           currentMessageIndex === 2 ? line3 : line4;
-        
-        if (!currentLine) {
-            currentMessageIndex++;
-            setTimeout(typeMessage, 300);
-            return;
-        }
-        
-        const currentMessage = messages[currentMessageIndex];
-        
-        if (currentCharIndex < currentMessage.length) {
-            // Remove cursor from current line if it exists
-            const cursor = currentLine.querySelector('.terminal-cursor');
-            if (cursor) {
-                cursor.remove();
-            }
-            
-            currentLine.textContent = currentMessage.substring(0, currentCharIndex + 1);
-            currentLine.classList.add('has-content');
-            currentCharIndex++;
-            setTimeout(typeMessage, 50 + Math.random() * 30);
-        } else {
-            // Message complete, move to next
-            currentMessageIndex++;
-            currentCharIndex = 0;
-            setTimeout(typeMessage, 400);
-        }
-    }
-    
-    // Start typing after a short delay
-    setTimeout(() => {
-        typeMessage();
-    }, 300);
 }
 
 function createParticleSystem() {
@@ -836,16 +765,8 @@ document.addEventListener('DOMContentLoaded', () => {
             update3DSceneTheme(currentTheme);
         }, 100);
         
-        // Note: Loading screen is hidden by terminal animation
     } catch (error) {
         console.error('Initialization error:', error);
-        // Make sure loading screen is hidden even on error
-        setTimeout(() => {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.classList.add('hidden');
-            }
-        }, 2000);
     }
 });
 
