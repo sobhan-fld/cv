@@ -344,6 +344,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
 }
 
 .pill-btn {
@@ -445,6 +446,25 @@ body {
 .sparkle.ambient {
     animation: twinkle 5s ease-in-out infinite;
     opacity: 0.3;
+}
+
+.wish-toast {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translate(-50%, 10px);
+    padding: 0.45rem 0.9rem;
+    background: rgba(6, 12, 25, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    pointer-events: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    animation: toastLift 2.1s ease forwards;
+    z-index: 3;
 }
 
 .firework {
@@ -570,6 +590,25 @@ body {
     }
 }
 
+@keyframes toastLift {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 12px);
+    }
+    15% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    85% {
+        opacity: 1;
+        transform: translate(-50%, -2px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -8px);
+    }
+}
+
 @keyframes fireworkPop {
     0% {
         opacity: 1;
@@ -602,6 +641,7 @@ body {
         right: auto;
         top: auto;
         align-self: flex-start;
+        display: none;
     }
 
     .photo-stack {

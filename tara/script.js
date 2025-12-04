@@ -3,10 +3,12 @@ const flipControl = document.getElementById('flipControl');
 const launchWishBtn = document.getElementById('launchWish');
 const sparkleLayer = document.getElementById('sparkleLayer');
 const wishTemplate = document.getElementById('wishTemplate');
+const ctaRow = document.querySelector('.cta-row');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const pointerFineQuery = window.matchMedia('(pointer: fine)');
 const allowTilt = !prefersReducedMotion && pointerFineQuery.matches;
 const allowAmbient = !prefersReducedMotion;
+let toastTimer = null;
 
 const randomBetween = (min, max) => Math.random() * (max - min) + min;
 
@@ -69,6 +71,7 @@ function launchWish() {
     requestAnimationFrame(() => star.classList.add('active'));
     setTimeout(() => star.remove(), 3600);
     spraySparkles();
+    showWishMessage();
     if (allowAmbient) {
         launchFireworks();
     }
@@ -90,6 +93,23 @@ function launchFireworks(count = 4) {
         document.body.appendChild(firework);
         setTimeout(() => firework.remove(), 900);
     }
+}
+
+function showWishMessage() {
+    if (!ctaRow) return;
+    if (toastTimer) {
+        clearTimeout(toastTimer);
+    }
+    const existing = ctaRow.querySelector('.wish-toast');
+    existing?.remove();
+    const toast = document.createElement('div');
+    toast.className = 'wish-toast';
+    toast.textContent = 'Make a wish ✨';
+    ctaRow.appendChild(toast);
+    toastTimer = setTimeout(() => {
+        toast.remove();
+        toastTimer = null;
+    }, 2100);
 }
 
 function handleTilt(event) {
