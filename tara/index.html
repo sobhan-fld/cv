@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tara's Animated Postcard</title>
+    <meta name="description" content="An animated digital postcard crafted for Tara with love, motion, and stardust.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="aurora aurora-one" aria-hidden="true"></div>
+    <div class="aurora aurora-two" aria-hidden="true"></div>
+    <div class="floating-charms" aria-hidden="true">
+        <span>✦</span>
+        <span>✷</span>
+        <span>✺</span>
+        <span>✶</span>
+        <span>✷</span>
+        <span>✦</span>
+    </div>
+
+    <main class="page">
+        <header class="intro">
+            <p class="eyebrow">Special delivery for Tara</p>
+            <h1>Hi Tara, this shimmering postcard traveled through code just to reach you.</h1>
+            <p class="lede">
+                It carries little reminders that your laughter rewrites gravity and your curiosity keeps the night sky awake.
+                Hover, tap, flip &mdash; it's all yours.
+            </p>
+            <div class="intro-actions">
+                <a class="ghost-link" href="../">&larr; Back to Sobhan's main universe</a>
+                <button id="flipControl" class="outline-btn" type="button" aria-pressed="false">
+                    Flip the postcard
+                </button>
+            </div>
+        </header>
+
+        <section class="postcard-scene" aria-live="polite">
+            <div class="postcard-shadow" aria-hidden="true"></div>
+            <article class="postcard" id="postcard" tabindex="0" aria-label="Interactive postcard for Tara">
+                <div class="postcard-face front" aria-hidden="false">
+                    <div class="stamp-chip">
+                        <span class="stamp-title">TARA MAIL</span>
+                    </div>
+                    <div class="photo-stack">
+                        <div class="photo-glow" aria-hidden="true"></div>
+                        <img src="../assets/Tara.jpg" alt="Tara smiling brightly" class="tara-photo" loading="lazy">
+                        <span class="photo-note">Certified joy architect</span>
+                    </div>
+                    <div class="front-copy">
+                        <p class="greeting">Hey Tara!</p>
+                        <p class="message">
+                            When the world needs extra light, it borrows yours.
+                            This digital postcard is proof that your courage, kindness, and cosmic ideas ripple far beyond pixels.
+                        </p>
+                        <ul class="tag-row">
+                            <li>Dream captain</li>
+                            <li>Wave maker</li>
+                            <li>Starlight keeper</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="postcard-face back" aria-hidden="true">
+                    <div class="address-block">
+                        <span class="address-label">Delivered to</span>
+                        <p class="address-line">Tara, Queen of Giggles</p>
+                        <p class="address-line">Anywhere Joy Lives · Earth</p>
+                    </div>
+                    <div class="back-message">
+                        <p>
+                            Dear Tara, consider this your official license to chase big, bold sparks.
+                            May every idea feel like a sunrise and every step hum with "you've got this".
+                        </p>
+                        <p>
+                            Whenever doubt knocks, remember this route exists just for you. Take a breath,
+                            flip the card, and know that your entire squad is cheering.
+                        </p>
+                    </div>
+                    <div class="stamp-mark">Stamped with nebula dust ✷</div>
+                    <div class="signature">&mdash; From Sobhan</div>
+                </div>
+            </article>
+            <div class="cta-row">
+                <button class="pill-btn" id="launchWish" type="button">
+                    <span class="star-icon" aria-hidden="true">✦</span>
+                    <span>Launch a shooting star</span>
+                </button>
+                <p class="hint">Tip: tap the postcard or the button to flip it anytime ✨</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="sparkleLayer" aria-hidden="true"></div>
+
+    <template id="wishTemplate">
+        <div class="shooting-star" aria-hidden="true">
+            <span class="star-core"></span>
+            <span class="star-tail tail-one"></span>
+            <span class="star-tail tail-two"></span>
+        </div>
+    </template>
+
+    <script type="module" src="script.js"></script>
