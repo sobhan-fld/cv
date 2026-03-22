@@ -1,160 +1,530 @@
-// CV Data
+const LANGUAGE_FILES = {
+    en: 'english.json',
+    es: 'espanol.json',
+    it: 'italian.json'
+};
+
+const UI_TEXT = {
+    en: {
+        lang: 'en',
+        nav: ['Home', 'About', 'Experience', 'Skills', 'Education', 'Contact'],
+        sectionEyebrows: ['Profile', 'Journey', 'Toolkit', 'Foundation', 'Connect'],
+        heroKicker: 'AI Engineer • Deep Learning • R&D',
+        heroPrimary: 'Get In Touch',
+        heroSecondary: 'Download PDF',
+        contactLabels: {
+            email: 'Email',
+            location: 'Location',
+            dob: 'Year of Birth',
+            linkedin: 'LinkedIn',
+            github: 'GitHub'
+        },
+        contactActions: {
+            email: 'Send Email',
+            linkedin: 'Open LinkedIn',
+            github: 'View GitHub'
+        },
+        stats: [
+            { value: '94%', label: 'Signal Classification Accuracy' },
+            { value: '96%', label: 'Message Filtering Accuracy' },
+            { value: '30%', label: 'Processing Efficiency Gain' },
+            { value: '3+', label: 'Years in AI, Backend, and R&D' }
+        ],
+        footer: '© 2026 Sobhan Fooladi Mahani. Built for clarity, speed, and good engineering.'
+    },
+    es: {
+        lang: 'es',
+        nav: ['Inicio', 'Perfil', 'Experiencia', 'Habilidades', 'Educación', 'Contacto'],
+        sectionEyebrows: ['Perfil', 'Trayectoria', 'Herramientas', 'Base', 'Conectar'],
+        heroKicker: 'Ingeniero de IA • Deep Learning • I+D',
+        heroPrimary: 'Contactar',
+        heroSecondary: 'Descargar PDF',
+        contactLabels: {
+            email: 'Correo',
+            location: 'Ubicación',
+            dob: 'Año de nacimiento',
+            linkedin: 'LinkedIn',
+            github: 'GitHub'
+        },
+        contactActions: {
+            email: 'Enviar correo',
+            linkedin: 'Abrir LinkedIn',
+            github: 'Ver GitHub'
+        },
+        stats: [
+            { value: '94%', label: 'Precisión en clasificación de señales' },
+            { value: '96%', label: 'Precisión en filtrado de mensajes' },
+            { value: '30%', label: 'Mejora de eficiencia de procesamiento' },
+            { value: '3+', label: 'Años en IA, backend e I+D' }
+        ],
+        footer: '© 2026 Sobhan Fooladi Mahani. Diseñado para claridad, velocidad y buena ingeniería.'
+    },
+    it: {
+        lang: 'it',
+        nav: ['Home', 'Profilo', 'Esperienza', 'Competenze', 'Formazione', 'Contatto'],
+        sectionEyebrows: ['Profilo', 'Percorso', 'Strumenti', 'Base', 'Contatto'],
+        heroKicker: 'Ingegnere AI • Deep Learning • R&S',
+        heroPrimary: 'Contattami',
+        heroSecondary: 'Scarica PDF',
+        contactLabels: {
+            email: 'Email',
+            location: 'Localita',
+            dob: 'Anno di nascita',
+            linkedin: 'LinkedIn',
+            github: 'GitHub'
+        },
+        contactActions: {
+            email: 'Invia email',
+            linkedin: 'Apri LinkedIn',
+            github: 'Vedi GitHub'
+        },
+        stats: [
+            { value: '94%', label: 'Accuratezza nella classificazione dei segnali' },
+            { value: '96%', label: 'Accuratezza nel filtro dei messaggi' },
+            { value: '30%', label: 'Miglioramento dell efficienza di elaborazione' },
+            { value: '3+', label: 'Anni in AI, backend e R&S' }
+        ],
+        footer: '© 2026 Sobhan Fooladi Mahani. Progettato per chiarezza, velocita e ottima ingegneria.'
+    }
+};
+
 let cvData = null;
 let currentLanguage = 'en';
+let currentSection = 0;
+let sectionObserver = null;
+let revealObserver = null;
 
-// Load CV data
+let scene;
+let camera;
+let renderer;
+let particleSystem;
+let animationFrameId = null;
+let mouse = { x: 0, y: 0 };
+let targetMouse = { x: 0, y: 0 };
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 async function loadCVData(lang = 'en') {
+    const selectedLanguage = LANGUAGE_FILES[lang] ? lang : 'en';
+
     try {
-        const fileName = lang === 'es' ? 'espanol.json' : 'english.json';
-        const response = await fetch(fileName);
+        const response = await fetch(LANGUAGE_FILES[selectedLanguage]);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Failed to load ${LANGUAGE_FILES[selectedLanguage]} (${response.status})`);
         }
+
         cvData = await response.json();
-        currentLanguage = lang;
-        console.log('CV data loaded:', cvData);
-        console.log('Experience data:', cvData.experience);
-        console.log('Skills data:', cvData.skills);
-        
-        // Wait a bit for DOM to be fully ready, then populate
-        setTimeout(() => {
-            populateContent();
-            updateNavigationLabels();
-        }, 100);
+        currentLanguage = selectedLanguage;
+        document.documentElement.lang = UI_TEXT[selectedLanguage].lang;
+        localStorage.setItem('language', selectedLanguage);
+
+        updateLanguageButtons();
+        populateContent();
+        updateNavigationLabels();
+        initScrollAnimations();
     } catch (error) {
         console.error('Error loading CV data:', error);
     }
 }
 
-// Update navigation labels based on language
 function updateNavigationLabels() {
-    if (!cvData || !cvData.translations) return;
-    
+    const ui = UI_TEXT[currentLanguage];
     const navLinks = document.querySelectorAll('.nav-link');
-    const translations = cvData.translations;
-    
-    // Update nav links if translations exist
-    if (navLinks.length >= 6) {
-        navLinks[0].textContent = currentLanguage === 'es' ? 'Inicio' : 'Home';
-        navLinks[1].textContent = translations.objective || 'About';
-        navLinks[2].textContent = translations.experience || 'Experience';
-        navLinks[3].textContent = translations.skills || 'Skills';
-        navLinks[4].textContent = translations.education || 'Education';
-        navLinks[5].textContent = translations.contact || 'Contact';
+    navLinks.forEach((link, index) => {
+        link.textContent = ui.nav[index] || link.textContent;
+    });
+
+    const eyebrows = ui.sectionEyebrows.slice(1);
+    const titleIds = {
+        experienceTitle: ui.nav[2],
+        skillsTitle: ui.nav[3],
+        educationTitle: ui.nav[4],
+        contactTitle: ui.nav[5]
+    };
+
+    Object.entries(titleIds).forEach(([id, text]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = text;
+        }
+    });
+
+    const eyebrowIds = ['experienceEyebrow', 'skillsEyebrow', 'educationEyebrow', 'contactEyebrow'];
+    eyebrowIds.forEach((id, index) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = eyebrows[index];
+        }
+    });
+
+    const heroKicker = document.getElementById('heroKicker');
+    if (heroKicker) heroKicker.textContent = ui.heroKicker;
+
+    const primaryCta = document.querySelector('.scroll-to-section');
+    if (primaryCta) primaryCta.textContent = ui.heroPrimary;
+
+    const downloadButton = document.getElementById('downloadButton');
+    if (downloadButton) downloadButton.textContent = ui.heroSecondary;
+
+    const footerText = document.getElementById('footerText');
+    if (footerText) footerText.textContent = ui.footer;
+}
+
+function formatHeroName(fullName) {
+    const parts = fullName.trim().split(/\s+/);
+    const first = parts.shift() || fullName;
+    const rest = parts.join(' ');
+    return `
+        <span class="title-line">${first}</span>
+        <span class="title-line">${rest}</span>
+    `;
+}
+
+function populateContent() {
+    if (!cvData) return;
+
+    const ui = UI_TEXT[currentLanguage];
+
+    const heroName = document.getElementById('heroName');
+    if (heroName && cvData.fullName) {
+        heroName.innerHTML = formatHeroName(cvData.fullName);
     }
-    
-    // Update section titles
-    const sectionTitles = document.querySelectorAll('.section-title');
-    if (sectionTitles.length >= 5) {
-        sectionTitles[0].textContent = translations.objective || 'About Me';
-        sectionTitles[1].textContent = translations.experience || 'Experience';
-        sectionTitles[2].textContent = translations.skills || 'Skills & Technologies';
-        sectionTitles[3].textContent = translations.education || 'Education';
-        sectionTitles[4].textContent = translations.contact || 'Get In Touch';
+
+    const heroTitle = document.getElementById('heroTitle');
+    if (heroTitle) heroTitle.textContent = cvData.title || '';
+
+    const heroDescription = document.getElementById('heroDescription');
+    if (heroDescription) heroDescription.textContent = cvData.objective?.[0] || '';
+
+    renderStats(ui.stats);
+    renderExperience(cvData.experience || []);
+    renderSkills(cvData.skills || []);
+    renderEducation(cvData.education || []);
+    renderContact(cvData.contact || {}, ui);
+}
+
+function renderStats(stats) {
+    const statsGrid = document.getElementById('statsGrid');
+    if (!statsGrid) return;
+
+    statsGrid.innerHTML = stats.map((stat) => `
+        <div class="stat-card fade-in">
+            <div class="stat-number">${stat.value}</div>
+            <div class="stat-label">${stat.label}</div>
+        </div>
+    `).join('');
+}
+
+function renderExperience(experience) {
+    const timeline = document.getElementById('experienceTimeline');
+    if (!timeline) return;
+
+    timeline.innerHTML = experience.map((exp) => `
+        <article class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-position">${exp.position || ''}</div>
+                    <div class="experience-location">${exp.location || ''}</div>
+                </div>
+                <div class="experience-period">${exp.period || ''}</div>
+            </div>
+            <ul class="experience-responsibilities">
+                ${(exp.responsibilities || []).map((item) => `<li>${item}</li>`).join('')}
+            </ul>
+        </article>
+    `).join('');
+}
+
+function renderSkills(skills) {
+    const skillsGrid = document.getElementById('skillsGrid');
+    if (!skillsGrid) return;
+
+    skillsGrid.innerHTML = skills.map((skill) => {
+        const parts = skill.split(':');
+        const categoryTitle = parts[0]?.trim() || skill;
+        const skillItems = parts[1]
+            ? parts[1].split(',').map((item) => item.trim()).filter(Boolean)
+            : [skill];
+
+        return `
+            <article class="skill-category fade-in">
+                <div class="skill-category-title">${categoryTitle}</div>
+                <ul class="skill-list">
+                    ${skillItems.map((item) => `<li>${item}</li>`).join('')}
+                </ul>
+            </article>
+        `;
+    }).join('');
+}
+
+function renderEducation(education) {
+    const educationList = document.getElementById('educationList');
+    if (!educationList) return;
+
+    educationList.innerHTML = education.map((item) => `
+        <article class="education-item fade-in">
+            <p class="education-text">${item}</p>
+        </article>
+    `).join('');
+}
+
+function renderContact(contact, ui) {
+    const contactInfo = document.getElementById('contactInfo');
+    const contactActions = document.getElementById('contactActions');
+
+    if (contactInfo) {
+        contactInfo.innerHTML = `
+            <div class="contact-item">
+                <span class="contact-label">${ui.contactLabels.email}</span>
+                <a href="mailto:${contact.email || ''}">${contact.email || ''}</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">${ui.contactLabels.location}</span>
+                <span>${contact.address || ''}</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">${ui.contactLabels.dob}</span>
+                <span>${contact.dob || ''}</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">${ui.contactLabels.linkedin}</span>
+                <a href="${contact.linkedin || '#'}" target="_blank" rel="noreferrer">${contact.linkedin || ''}</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">${ui.contactLabels.github}</span>
+                <a href="${contact.github || '#'}" target="_blank" rel="noreferrer">${contact.github || ''}</a>
+            </div>
+        `;
     }
-    
-    // Update hero button
-    const getInTouchBtn = document.querySelector('.scroll-to-section');
-    if (getInTouchBtn) {
-        getInTouchBtn.textContent = currentLanguage === 'es' ? 'Contactar' : 'Get In Touch';
+
+    if (contactActions) {
+        contactActions.innerHTML = `
+            <a href="mailto:${contact.email || ''}" class="btn btn-primary">${ui.contactActions.email}</a>
+            <a href="${contact.linkedin || '#'}" target="_blank" rel="noreferrer" class="btn btn-secondary">${ui.contactActions.linkedin}</a>
+            <a href="${contact.github || '#'}" target="_blank" rel="noreferrer" class="btn btn-ghost">${ui.contactActions.github}</a>
+        `;
     }
 }
 
-// Three.js Scene Setup
-let scene, camera, renderer, particles, particleSystem;
-let mouse = { x: 0, y: 0 };
-let targetMouse = { x: 0, y: 0 };
-let animationFrameId = null;
+function initLanguage() {
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    currentLanguage = LANGUAGE_FILES[savedLanguage] ? savedLanguage : 'en';
+    updateLanguageButtons();
+
+    document.querySelectorAll('.language-option').forEach((button) => {
+        button.addEventListener('click', () => {
+            const newLanguage = button.dataset.lang;
+            if (newLanguage && newLanguage !== currentLanguage) {
+                loadCVData(newLanguage);
+            }
+        });
+    });
+}
+
+function updateLanguageButtons() {
+    document.querySelectorAll('.language-option').forEach((button) => {
+        button.classList.toggle('active', button.dataset.lang === currentLanguage);
+    });
+}
+
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            updateThemeIcon(nextTheme);
+            update3DSceneTheme(nextTheme);
+        });
+    }
+}
+
+function updateThemeIcon(theme) {
+    const themeIcon = document.querySelector('.theme-icon');
+    if (themeIcon) {
+        themeIcon.textContent = theme === 'dark' ? '◐' : '◑';
+    }
+}
+
+function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link, .nav-brand');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const indicators = document.querySelectorAll('.indicator');
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetSection = parseInt(link.dataset.section || '0', 10);
+            changeSection(targetSection);
+
+            if (window.innerWidth <= 900 && navLinksContainer) {
+                navLinksContainer.classList.remove('active');
+            }
+        });
+    });
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => changeSection(index));
+    });
+
+    document.querySelectorAll('.scroll-to-section').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            changeSection(parseInt(button.dataset.target || '5', 10));
+        });
+    });
+
+    if (menuToggle && navLinksContainer) {
+        menuToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+    }
+}
+
+function changeSection(index) {
+    const sections = document.querySelectorAll('.content-section');
+    if (sections[index]) {
+        sections[index].scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+function updateIndicators() {
+    document.querySelectorAll('.indicator').forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSection);
+    });
+}
+
+function updateNavigation() {
+    document.querySelectorAll('.nav-link').forEach((link, index) => {
+        link.classList.toggle('active', index === currentSection);
+    });
+}
+
+function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    const progressFill = document.getElementById('scrollProgressFill');
+
+    if (progressFill) {
+        progressFill.style.width = `${progress}%`;
+    }
+}
+
+function updateSections() {
+    if (sectionObserver) {
+        sectionObserver.disconnect();
+    }
+
+    const sections = document.querySelectorAll('.content-section');
+
+    sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                const sectionIndex = parseInt(entry.target.dataset.section || '0', 10);
+                currentSection = sectionIndex;
+                updateIndicators();
+                updateNavigation();
+            }
+        });
+    }, {
+        threshold: 0.45,
+        rootMargin: '-10% 0px -20% 0px'
+    });
+
+    sections.forEach((section) => sectionObserver.observe(section));
+}
+
+function initScrollAnimations() {
+    if (revealObserver) {
+        revealObserver.disconnect();
+    }
+
+    const elements = document.querySelectorAll('.fade-in');
+    revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    elements.forEach((element) => {
+        if (prefersReducedMotion) {
+            element.classList.add('visible');
+        } else {
+            revealObserver.observe(element);
+        }
+    });
+}
 
 function initThreeJS() {
-    // Scene
-    scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x050508, 10, 50);
-
-    // Camera
-    camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
-    camera.position.z = 5;
-
-    // Renderer
     const canvas = document.getElementById('canvas3d');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x09111f, 12, 42);
+
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 7;
+
     renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
+        canvas,
         alpha: true,
-        antialias: true
+        antialias: false,
+        powerPreference: 'high-performance'
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setClearColor(0x050508, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setClearColor(0x000000, 0);
 
-    // Create particle system
     createParticleSystem();
-
-    // Create lights for the scene
     createLights();
+    update3DSceneTheme(document.documentElement.getAttribute('data-theme') || 'dark');
 
-    // Create 3D text (optional, can be added later)
-    // create3DText();
-
-    // Event listeners
     window.addEventListener('resize', onWindowResize);
-    window.addEventListener('mousemove', onMouseMove);
+    if (!prefersReducedMotion) {
+        window.addEventListener('mousemove', onMouseMove);
+    }
     window.addEventListener('scroll', onScroll, { passive: true });
-    
-    // Initial scroll progress update
-    updateScrollProgress();
-    update3DSceneFromScroll();
 
-    // Start animation
     animate();
 }
 
 function createParticleSystem() {
-    const particleCount = 2000;
+    const isMobile = window.innerWidth < 900;
+    const particleCount = prefersReducedMotion ? 120 : (isMobile ? 280 : 520);
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
 
-    // Get current theme
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    const color1 = new THREE.Color(currentTheme === 'dark' ? 0x3b82f6 : 0x2563eb); // Primary color
-    const color2 = new THREE.Color(currentTheme === 'dark' ? 0x8b5cf6 : 0x7c3aed); // Secondary color
-    const color3 = new THREE.Color(currentTheme === 'dark' ? 0x10b981 : 0x059669); // Accent color (green)
-
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < particleCount; i += 1) {
         const i3 = i * 3;
-
-        // Positions in a sphere
-        const radius = Math.random() * 50 + 10;
+        const radius = Math.random() * 24 + 6;
         const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(Math.random() * 2 - 1);
+        const phi = Math.acos((Math.random() * 2) - 1);
 
         positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
         positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
         positions[i3 + 2] = radius * Math.cos(phi);
 
-        // Colors
-        const colorChoice = Math.random();
-        let color;
-        if (colorChoice < 0.33) {
-            color = color1;
-        } else if (colorChoice < 0.66) {
-            color = color2;
-        } else {
-            color = color3;
-        }
-
-        colors[i3] = color.r;
-        colors[i3 + 1] = color.g;
-        colors[i3 + 2] = color.b;
-
-        // Sizes
-        sizes[i] = Math.random() * 3 + 1;
+        sizes[i] = Math.random() * 2 + 0.4;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -174,55 +544,33 @@ function createParticleSystem() {
             uniform float time;
             uniform vec2 mouse;
             uniform float scrollProgress;
-            
+
             void main() {
                 vColor = color;
                 vec3 pos = position;
-                
-                // Add wave motion
-                pos.y += sin(time * 0.5 + pos.x * 0.1) * 0.5;
-                pos.x += cos(time * 0.3 + pos.z * 0.1) * 0.5;
-                
-                // Scroll-based parallax transformation
-                float scrollRot = scrollProgress * 3.14159265359 * 2.0;
-                float scrollScale = 1.0 + scrollProgress * 0.5;
-                
-                // Rotate particles based on scroll
-                float cosRot = cos(scrollRot);
-                float sinRot = sin(scrollRot);
-                float rotX = cosRot * pos.x - sinRot * pos.z;
-                float rotZ = sinRot * pos.x + cosRot * pos.z;
-                pos.x = rotX;
-                pos.z = rotZ;
-                
-                // Scale based on scroll
-                pos = pos * scrollScale;
-                
-                // Parallax offset based on scroll
-                pos.y += scrollProgress * 10.0;
-                
-                // Mouse interaction (subtle)
-                vec2 mouseInfluence = (mouse - vec2(pos.x, pos.y)) * 0.005;
-                pos.xy = pos.xy + mouseInfluence;
-                
+                pos.y += sin(time * 0.35 + pos.x * 0.16) * 0.22;
+                pos.x += cos(time * 0.25 + pos.z * 0.14) * 0.18;
+                pos.xy += mouse * 0.08;
+                pos.z += scrollProgress * 3.0;
+
                 vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-                gl_PointSize = size * (300.0 / -mvPosition.z);
+                gl_PointSize = size * (120.0 / -mvPosition.z);
                 gl_Position = projectionMatrix * mvPosition;
             }
         `,
         fragmentShader: `
             varying vec3 vColor;
-            
+
             void main() {
-                float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
-                float alpha = 1.0 - smoothstep(0.0, 0.5, distanceToCenter);
-                gl_FragColor = vec4(vColor, alpha * 0.8);
+                float d = distance(gl_PointCoord, vec2(0.5));
+                float alpha = 1.0 - smoothstep(0.0, 0.5, d);
+                gl_FragColor = vec4(vColor, alpha * 0.55);
             }
         `,
         transparent: true,
         vertexColors: true,
-        blending: THREE.AdditiveBlending,
-        depthTest: false
+        depthTest: false,
+        blending: THREE.AdditiveBlending
     });
 
     particleSystem = new THREE.Points(geometry, material);
@@ -230,547 +578,97 @@ function createParticleSystem() {
 }
 
 function createLights() {
-    // Add lights for the scene
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+    const pointA = new THREE.PointLight(0x66d9ef, 0.75, 80);
+    const pointB = new THREE.PointLight(0xff8a5b, 0.55, 80);
 
-    // Get current theme for lights
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    const lightColor1 = currentTheme === 'dark' ? 0x3b82f6 : 0x2563eb;
-    const lightColor2 = currentTheme === 'dark' ? 0x8b5cf6 : 0x7c3aed;
-    const lightColor3 = currentTheme === 'dark' ? 0x10b981 : 0x059669;
-    
-    const pointLight1 = new THREE.PointLight(lightColor1, 0.8, 100);
-    pointLight1.position.set(5, 5, 5);
-    scene.add(pointLight1);
+    pointA.position.set(6, 4, 8);
+    pointB.position.set(-5, -3, 7);
 
-    const pointLight2 = new THREE.PointLight(lightColor2, 0.8, 100);
-    pointLight2.position.set(-5, -5, 5);
-    scene.add(pointLight2);
-
-    const pointLight3 = new THREE.PointLight(lightColor3, 0.8, 100);
-    pointLight3.position.set(0, 0, 10);
-    scene.add(pointLight3);
+    scene.add(ambient, pointA, pointB);
 }
 
-function animate() {
-    animationFrameId = requestAnimationFrame(animate);
+function update3DSceneTheme(theme) {
+    if (!particleSystem?.geometry?.attributes?.color) return;
 
-    const time = Date.now() * 0.001;
+    const palette = theme === 'dark'
+        ? [0x7dd3fc, 0xf59e0b, 0x34d399]
+        : [0x2563eb, 0xf97316, 0x059669];
 
-    // Update particles
-    if (particleSystem) {
-        particleSystem.material.uniforms.time.value = time;
-        particleSystem.material.uniforms.mouse.value.set(
-            targetMouse.x * 0.5,
-            targetMouse.y * 0.5
-        );
-        // scrollProgress is updated in updateScrollTransform() below
+    const colors = particleSystem.geometry.attributes.color.array;
+    for (let i = 0; i < colors.length; i += 3) {
+        const hex = palette[(i / 3) % palette.length];
+        const color = new THREE.Color(hex);
+        colors[i] = color.r;
+        colors[i + 1] = color.g;
+        colors[i + 2] = color.b;
     }
+    particleSystem.geometry.attributes.color.needsUpdate = true;
 
-    // Camera movement based on mouse (subtle)
-    camera.position.x += (targetMouse.x * 0.5 - camera.position.x) * 0.05;
-    camera.position.y += (-targetMouse.y * 0.5 - camera.position.y) * 0.05;
-    camera.lookAt(scene.position);
-
-    // Smooth mouse interpolation
-    mouse.x += (targetMouse.x - mouse.x) * 0.05;
-    mouse.y += (targetMouse.y - mouse.y) * 0.05;
-
-    // Update 3D scene based on current section
-    updateScrollTransform();
-
-    renderer.render(scene, camera);
+    scene.children.forEach((child) => {
+        if (child instanceof THREE.PointLight) {
+            child.intensity = theme === 'dark' ? 0.75 : 0.45;
+        }
+    });
 }
 
 function onWindowResize() {
+    if (!camera || !renderer) return;
+
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 }
 
 function onMouseMove(event) {
-    targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    targetMouse.x = ((event.clientX / window.innerWidth) * 2 - 1) * 0.35;
+    targetMouse.y = (-(event.clientY / window.innerHeight) * 2 + 1) * 0.35;
 }
 
-// Normal Scrolling with Intersection Observer
-let currentSection = 0;
-let totalSections = 6;
-
 function onScroll() {
-    // Normal scroll behavior - just update progress and 3D scene
     updateScrollProgress();
     update3DSceneFromScroll();
 }
 
-function updateScrollProgress() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-    
-    const progressFill = document.getElementById('scrollProgressFill');
-    if (progressFill) {
-        progressFill.style.width = progress + '%';
-    }
-}
-
 function update3DSceneFromScroll() {
+    if (!camera || !particleSystem?.material?.uniforms) return;
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-    
-    if (particleSystem && particleSystem.material && particleSystem.material.uniforms) {
-        particleSystem.material.uniforms.scrollProgress.value = progress;
-    }
-    
-    // Camera movement based on scroll
-    camera.position.z = 5 + progress * 3;
-    camera.rotation.z = Math.sin(progress * Math.PI * 2) * 0.05;
+
+    particleSystem.material.uniforms.scrollProgress.value = progress;
+    camera.position.z = 7 + (progress * 1.4);
 }
 
-function updateSections() {
-    // Use Intersection Observer to detect visible sections
-    const sections = document.querySelectorAll('.content-section');
-    
-    // Make first section visible immediately
-    if (sections.length > 0) {
-        sections[0].classList.add('visible');
-        currentSection = 0;
+function animate() {
+    if (!renderer || !scene || !camera) return;
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    if (particleSystem?.material?.uniforms) {
+        const time = performance.now() * 0.0007;
+        mouse.x += (targetMouse.x - mouse.x) * 0.06;
+        mouse.y += (targetMouse.y - mouse.y) * 0.06;
+        particleSystem.material.uniforms.time.value = time;
+        particleSystem.material.uniforms.mouse.value.set(mouse.x, mouse.y);
+        particleSystem.rotation.y += prefersReducedMotion ? 0.0002 : 0.0009;
     }
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                const sectionIndex = parseInt(entry.target.getAttribute('data-section'));
-                if (!isNaN(sectionIndex)) {
-                    // Update current section if it's the most visible one
-                    const rect = entry.target.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight;
-                    const visibleRatio = Math.min(rect.height, viewportHeight) / viewportHeight;
-                    
-                    if (visibleRatio > 0.3) {
-                        currentSection = sectionIndex;
-                        updateIndicators();
-                        updateNavigation();
-                    }
-                }
-            }
-        });
-    }, {
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-        rootMargin: '-10% 0px -10% 0px'
-    });
-    
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+
+    renderer.render(scene, camera);
 }
 
-function updateIndicators() {
-    const indicators = document.querySelectorAll('.indicator');
-    indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentSection);
-    });
-}
-
-function updateNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach((link, index) => {
-        link.classList.toggle('active', index === currentSection);
-    });
-}
-
-function changeSection(index) {
-    const sections = document.querySelectorAll('.content-section');
-    if (index >= 0 && index < sections.length) {
-        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
-// Update scroll-based 3D transformations (for animation loop)
-function updateScrollTransform() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-    
-    if (particleSystem && particleSystem.material && particleSystem.material.uniforms) {
-        particleSystem.material.uniforms.scrollProgress.value = progress;
-    }
-}
-
-// Navigation
-function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinksContainer = document.querySelector('.nav-links');
-    const indicators = document.querySelectorAll('.indicator');
-
-    // Nav links
-    navLinks.forEach((link, index) => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            changeSection(index);
-            
-            // Close mobile menu
-            if (window.innerWidth <= 768 && navLinksContainer) {
-                navLinksContainer.classList.remove('active');
-            }
-        });
-    });
-
-    // Section indicators
-    if (indicators.length > 0) {
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                changeSection(index);
-            });
-        });
-    }
-
-    // Menu toggle for mobile
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-        });
-    }
-    
-    // Scroll-to-section buttons
-    document.querySelectorAll('.scroll-to-section').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = parseInt(btn.getAttribute('data-target'));
-            changeSection(target);
-        });
-    });
-}
-
-// Populate content from JSON
-function populateContent() {
-    if (!cvData) {
-        console.warn('CV data not loaded yet');
-        return;
-    }
-    
-    console.log('Populating content...');
-    
-    // Ensure DOM elements exist
-    if (!document.getElementById('experienceTimeline')) {
-        console.error('experienceTimeline element does not exist in DOM');
-    }
-    if (!document.getElementById('skillsGrid')) {
-        console.error('skillsGrid element does not exist in DOM');
-    }
-
-    // Hero section
-    if (cvData.fullName) {
-        document.getElementById('heroName').innerHTML = `
-            <span class="title-line">${cvData.fullName.split(' ')[0]}</span>
-            <span class="title-line">${cvData.fullName.split(' ').slice(1).join(' ')}</span>
-        `;
-    }
-
-    if (cvData.title) {
-        document.getElementById('heroTitle').textContent = cvData.title;
-    }
-
-    if (cvData.objective && cvData.objective[0]) {
-        document.getElementById('heroDescription').textContent = cvData.objective[0].substring(0, 80) + '...';
-    }
-
-    // About section
-    if (cvData.objective && cvData.objective[0]) {
-        document.getElementById('aboutText').textContent = cvData.objective[0];
-    }
-
-    // Experience section
-    if (cvData.experience && Array.isArray(cvData.experience)) {
-        const timeline = document.getElementById('experienceTimeline');
-        if (timeline) {
-            timeline.innerHTML = '';
-
-            cvData.experience.forEach((exp, index) => {
-                if (exp && exp.position) {
-                    const expItem = document.createElement('div');
-                    expItem.className = 'experience-item fade-in';
-                    expItem.innerHTML = `
-                        <div class="experience-header">
-                            <div>
-                                <div class="experience-position">${exp.position || ''}</div>
-                                <div class="experience-location">${exp.location || ''}</div>
-                            </div>
-                            <div class="experience-period">${exp.period || ''}</div>
-                        </div>
-                        <ul class="experience-responsibilities">
-                            ${(exp.responsibilities || []).map(resp => `<li>${resp}</li>`).join('')}
-                        </ul>
-                    `;
-                    timeline.appendChild(expItem);
-
-                    // Trigger animation on scroll
-                    setTimeout(() => {
-                        observeElement(expItem);
-                    }, index * 100);
-                }
-            });
-        } else {
-            console.error('Experience timeline element not found');
-        }
-    } else {
-        console.warn('No experience data found in CV data');
-    }
-
-    // Skills section
-    if (cvData.skills && Array.isArray(cvData.skills)) {
-        const skillsGrid = document.getElementById('skillsGrid');
-        if (skillsGrid) {
-            skillsGrid.innerHTML = '';
-
-            cvData.skills.forEach((skill, index) => {
-                if (skill) {
-                    const skillCategory = document.createElement('div');
-                    skillCategory.className = 'skill-category fade-in';
-                    
-                    const skillParts = skill.split(':');
-                    const categoryTitle = skillParts[0] || skill;
-                    const skillItems = skillParts[1] ? skillParts[1].split(',').map(s => s.trim()).filter(s => s) : [skill];
-
-                    skillCategory.innerHTML = `
-                        <div class="skill-category-title">${categoryTitle}</div>
-                        <ul class="skill-list">
-                            ${skillItems.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    `;
-                    skillsGrid.appendChild(skillCategory);
-
-                    setTimeout(() => {
-                        observeElement(skillCategory);
-                    }, index * 100);
-                }
-            });
-        } else {
-            console.error('Skills grid element not found');
-        }
-    } else {
-        console.warn('No skills data found in CV data');
-    }
-
-    // Education section
-    if (cvData.education) {
-        const educationList = document.getElementById('educationList');
-        educationList.innerHTML = '';
-
-        cvData.education.forEach((edu, index) => {
-            const eduItem = document.createElement('div');
-            eduItem.className = 'education-item fade-in';
-            eduItem.innerHTML = `<p class="education-text">${edu}</p>`;
-            educationList.appendChild(eduItem);
-
-            setTimeout(() => {
-                observeElement(eduItem);
-            }, index * 100);
-        });
-    }
-
-    // Contact section
-    if (cvData.contact) {
-        const contactInfo = document.getElementById('contactInfo');
-        contactInfo.innerHTML = `
-            <div class="contact-item">
-                <strong>Email:</strong> ${cvData.contact.email}
-            </div>
-            <div class="contact-item">
-                <strong>Location:</strong> ${cvData.contact.address}
-            </div>
-            <div class="contact-item">
-                <strong>Date of Birth:</strong> ${cvData.contact.dob}
-            </div>
-            <div class="contact-item">
-                <strong>LinkedIn:</strong> 
-                <a href="${cvData.contact.linkedin}" target="_blank" style="color: var(--primary-color);">
-                    ${cvData.contact.linkedin}
-                </a>
-            </div>
-        `;
-
-        const contactActions = document.getElementById('contactActions');
-        contactActions.innerHTML = `
-            <a href="mailto:${cvData.contact.email}" class="btn btn-primary">Send Email</a>
-            <a href="${cvData.contact.linkedin}" target="_blank" class="btn btn-linkedin">LinkedIn</a>
-        `;
-    }
-}
-
-// Intersection Observer for scroll animations
-function observeElement(element) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    observer.observe(element);
-}
-
-// Initialize all fade-in elements
-function initScrollAnimations() {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach(element => {
-        observeElement(element);
-    });
-}
-
-// Language Management
-function initLanguage() {
-    // Check for saved language preference or default to English
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    currentLanguage = savedLanguage;
-    
-    // Update language toggle button
-    updateLanguageButton(savedLanguage);
-    
-    // Language toggle button
-    const languageToggle = document.getElementById('languageToggle');
-    if (languageToggle) {
-        languageToggle.addEventListener('click', () => {
-            const newLanguage = currentLanguage === 'en' ? 'es' : 'en';
-            currentLanguage = newLanguage;
-            localStorage.setItem('language', newLanguage);
-            updateLanguageButton(newLanguage);
-            
-            // Reload CV data with new language
-            loadCVData(newLanguage);
-        });
-    }
-}
-
-function updateLanguageButton(lang) {
-    const languageText = document.querySelector('.language-text');
-    if (languageText) {
-        languageText.textContent = lang === 'es' ? 'ES' : 'EN';
-    }
-}
-
-// Theme Management
-function initTheme() {
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Update theme toggle icon
-    updateThemeIcon(savedTheme);
-    
-    // Theme toggle button
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-            
-            // Update 3D scene colors based on theme
-            update3DSceneTheme(newTheme);
-        });
-    }
-}
-
-function updateThemeIcon(theme) {
-    const themeIcon = document.querySelector('.theme-icon');
-    if (themeIcon) {
-        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-    }
-}
-
-function update3DSceneTheme(theme) {
-    // Update particle colors based on theme
-    if (particleSystem && particleSystem.geometry && particleSystem.geometry.attributes.color) {
-        const colors = particleSystem.geometry.attributes.color.array;
-        const color1 = new THREE.Color(theme === 'dark' ? 0x3b82f6 : 0x2563eb); // Primary
-        const color2 = new THREE.Color(theme === 'dark' ? 0x8b5cf6 : 0x7c3aed); // Secondary
-        const color3 = new THREE.Color(theme === 'dark' ? 0x10b981 : 0x059669); // Accent
-        
-        for (let i = 0; i < colors.length; i += 3) {
-            const choice = Math.random();
-            let color;
-            if (choice < 0.33) {
-                color = color1;
-            } else if (choice < 0.66) {
-                color = color2;
-            } else {
-                color = color3;
-            }
-            
-            colors[i] = color.r;
-            colors[i + 1] = color.g;
-            colors[i + 2] = color.b;
-        }
-        
-        particleSystem.geometry.attributes.color.needsUpdate = true;
-    }
-    
-    // Update lights based on theme
-    if (scene) {
-        scene.children.forEach(child => {
-            if (child instanceof THREE.PointLight) {
-                if (child.color.getHex() === 0x00d4ff || child.color.getHex() === 0x2563eb) {
-                    child.color.setHex(theme === 'dark' ? 0x3b82f6 : 0x2563eb);
-                } else if (child.color.getHex() === 0x7b2cbf || child.color.getHex() === 0x7c3aed) {
-                    child.color.setHex(theme === 'dark' ? 0x8b5cf6 : 0x7c3aed);
-                } else if (child.color.getHex() === 0x00ff88 || child.color.getHex() === 0x059669) {
-                    child.color.setHex(theme === 'dark' ? 0x10b981 : 0x059669);
-            }
-        }
-    });
-    }
-}
-
-// Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-    try {
-        // Initialize theme first
-        initTheme();
-        
-        // Initialize language
-        initLanguage();
-        
-        // Load CV data with saved language preference
-        const savedLanguage = localStorage.getItem('language') || 'en';
-        loadCVData(savedLanguage);
-
-        // Initialize Three.js
-        initThreeJS();
-
-        // Initialize navigation
-        initNavigation();
-
-        // Initialize sections with Intersection Observer
-        setTimeout(() => {
-            updateSections();
-            updateIndicators();
-            updateNavigation();
-            updateScrollProgress();
-            
-            // Update 3D scene with current theme
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            update3DSceneTheme(currentTheme);
-        }, 100);
-        
-    } catch (error) {
-        console.error('Initialization error:', error);
-    }
+    initTheme();
+    initLanguage();
+    initNavigation();
+    updateSections();
+    updateScrollProgress();
+    loadCVData(currentLanguage);
+    initThreeJS();
 });
 
-// Cleanup on page unload
 window.addEventListener('beforeunload', () => {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
