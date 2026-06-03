@@ -89,6 +89,33 @@
             touch-action: none;
         }
 
+        .music-start {
+            position: fixed;
+            z-index: 28;
+            right: 1rem;
+            bottom: 1rem;
+            min-height: 44px;
+            border: 1px solid rgba(255, 250, 243, 0.28);
+            border-radius: 8px;
+            padding: 0.66rem 0.9rem;
+            color: var(--ink);
+            background: rgba(14, 13, 18, 0.72);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(0.5rem);
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .music-start.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
         .hero-copy {
             position: absolute;
             z-index: 4;
@@ -519,6 +546,18 @@
             .card-trigger {
                 bottom: 0.7rem;
             }
+
+            .music-start {
+                left: 50%;
+                right: auto;
+                bottom: 4.9rem;
+                width: min(310px, calc(100% - 1.4rem));
+                transform: translateX(-50%) translateY(0.5rem);
+            }
+
+            .music-start.is-visible {
+                transform: translateX(-50%) translateY(0);
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -556,6 +595,8 @@
             This birthday cake needs WebGL. Please open it in a modern browser.
         </div>
     </main>
+
+    <button class="music-start" type="button" id="musicStart">Tap for music</button>
 
     <section class="letter-modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle" aria-hidden="true" inert>
         <div class="letter-card">
@@ -601,6 +642,7 @@
 
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const birthdayMusic = document.getElementById("birthdayMusic");
+        const musicStartButton = document.getElementById("musicStart");
         const canvas = document.getElementById("cakeScene");
         const fallback = document.getElementById("webglFallback");
         const openLetterButton = document.getElementById("openLetter");
@@ -1285,7 +1327,17 @@
         function startBirthdayMusic() {
             birthdayMusic.muted = false;
             birthdayMusic.volume = 0.48;
-            birthdayMusic.play().catch(() => {});
+            const playAttempt = birthdayMusic.play();
+
+            if (playAttempt && typeof playAttempt.then === "function") {
+                playAttempt
+                    .then(() => {
+                        musicStartButton.classList.remove("is-visible");
+                    })
+                    .catch(() => {
+                        musicStartButton.classList.add("is-visible");
+                    });
+            }
         }
 
         canvas.addEventListener("pointerdown", (event) => {
@@ -1305,6 +1357,13 @@
 
         openLetterButton.addEventListener("click", openLetter);
         closeLetterButton.addEventListener("click", closeLetter);
+        musicStartButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            startBirthdayMusic();
+        });
+        birthdayMusic.addEventListener("playing", () => {
+            musicStartButton.classList.remove("is-visible");
+        });
 
         letterModal.addEventListener("click", (event) => {
             if (event.target === letterModal) {
@@ -1344,10 +1403,16 @@
         setModalFocus(false);
         setViewerFocus(false);
         birthdayMusic.volume = 0.48;
+        birthdayMusic.load();
         startBirthdayMusic();
-        ["pointerdown", "touchstart", "click", "keydown"].forEach((eventName) => {
-            document.addEventListener(eventName, startBirthdayMusic, { once: true, passive: true });
+        ["pointerdown", "touchstart", "touchend", "click", "keydown"].forEach((eventName) => {
+            document.addEventListener(eventName, startBirthdayMusic, { once: true, capture: true });
         });
+        window.setTimeout(() => {
+            if (birthdayMusic.paused) {
+                musicStartButton.classList.add("is-visible");
+            }
+        }, 900);
         resize();
         animate();
         window.setTimeout(() => launchSparkles(34), 700);
