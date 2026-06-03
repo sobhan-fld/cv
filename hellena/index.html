@@ -534,7 +534,7 @@
     </style>
 </head>
 <body>
-    <audio id="birthdayMusic" src="../assets/hellena/nastelbom-happy-birthday-469282.mp3" autoplay loop preload="auto"></audio>
+    <audio id="birthdayMusic" src="../assets/hellena/nastelbom-happy-birthday-469282.mp3" autoplay loop preload="auto" playsinline></audio>
 
     <main class="birthday-scene" id="birthdayScene">
         <canvas class="scene-canvas" id="cakeScene" aria-label="Interactive 3D birthday cake for Hellena"></canvas>
@@ -1088,6 +1088,7 @@
         }
 
         function openLetter() {
+            startBirthdayMusic();
             letterModal.classList.add("is-visible");
             letterModal.setAttribute("aria-hidden", "false");
             letterModal.removeAttribute("inert");
@@ -1153,6 +1154,7 @@
         }
 
         function handleSceneClick(event) {
+            startBirthdayMusic();
             setPointerFromEvent(event);
             raycaster.setFromCamera(pointer, camera);
             const hits = raycaster.intersectObjects(interactive, true);
@@ -1280,7 +1282,14 @@
             }
         }
 
+        function startBirthdayMusic() {
+            birthdayMusic.muted = false;
+            birthdayMusic.volume = 0.48;
+            birthdayMusic.play().catch(() => {});
+        }
+
         canvas.addEventListener("pointerdown", (event) => {
+            startBirthdayMusic();
             dragActive = true;
             dragStartX = event.clientX;
             dragStartRotation = targetRotation;
@@ -1334,10 +1343,10 @@
         window.addEventListener("resize", resize);
         setModalFocus(false);
         setViewerFocus(false);
-        birthdayMusic.volume = 0.42;
-        birthdayMusic.play().catch(() => {
-            document.addEventListener("pointerdown", () => birthdayMusic.play().catch(() => {}), { once: true });
-            document.addEventListener("keydown", () => birthdayMusic.play().catch(() => {}), { once: true });
+        birthdayMusic.volume = 0.48;
+        startBirthdayMusic();
+        ["pointerdown", "touchstart", "click", "keydown"].forEach((eventName) => {
+            document.addEventListener(eventName, startBirthdayMusic, { once: true, passive: true });
         });
         resize();
         animate();
