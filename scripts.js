@@ -9,7 +9,7 @@ const UI_TEXT = {
         lang: 'en',
         nav: ['Home', 'About', 'Experience', 'Skills', 'Education', 'Contact'],
         sectionEyebrows: ['Profile', 'Journey', 'Toolkit', 'Foundation', 'Connect'],
-        heroKicker: 'AI Engineer • Deep Learning • R&D',
+        heroKicker: 'CTO • AI Research Engineer • Deep Learning',
         heroPrimary: 'Get In Touch',
         heroSecondary: 'Download PDF',
         contactLabels: {
@@ -25,10 +25,10 @@ const UI_TEXT = {
             github: 'View GitHub'
         },
         stats: [
-            { value: '94%', label: 'Signal Classification Accuracy' },
+            { value: '10/10', label: 'MSc Thesis Score – Highest Honors' },
             { value: '96%', label: 'Message Filtering Accuracy' },
-            { value: '30%', label: 'Processing Efficiency Gain' },
-            { value: '3+', label: 'Years in AI, Backend, and R&D' }
+            { value: '94%', label: 'Gesture Classification Accuracy' },
+            { value: '4+', label: 'Years in AI Research & Engineering' }
         ],
         footer: '© 2026 Sobhan Fooladi Mahani. Built for clarity, speed, and good engineering.'
     },
@@ -36,7 +36,7 @@ const UI_TEXT = {
         lang: 'es',
         nav: ['Inicio', 'Perfil', 'Experiencia', 'Habilidades', 'Educación', 'Contacto'],
         sectionEyebrows: ['Perfil', 'Trayectoria', 'Herramientas', 'Base', 'Conectar'],
-        heroKicker: 'Ingeniero de IA • Deep Learning • I+D',
+        heroKicker: 'CTO • Ingeniero de Investigación IA • Deep Learning',
         heroPrimary: 'Contactar',
         heroSecondary: 'Descargar PDF',
         contactLabels: {
@@ -52,10 +52,10 @@ const UI_TEXT = {
             github: 'Ver GitHub'
         },
         stats: [
-            { value: '94%', label: 'Precisión en clasificación de señales' },
+            { value: '10/10', label: 'Nota de Tesis – Mención de Honor' },
             { value: '96%', label: 'Precisión en filtrado de mensajes' },
-            { value: '30%', label: 'Mejora de eficiencia de procesamiento' },
-            { value: '3+', label: 'Años en IA, backend e I+D' }
+            { value: '94%', label: 'Precisión en clasificación de gestos' },
+            { value: '4+', label: 'Años en investigación y desarrollo de IA' }
         ],
         footer: '© 2026 Sobhan Fooladi Mahani. Diseñado para claridad, velocidad y buena ingeniería.'
     },
@@ -63,12 +63,12 @@ const UI_TEXT = {
         lang: 'it',
         nav: ['Home', 'Profilo', 'Esperienza', 'Competenze', 'Formazione', 'Contatto'],
         sectionEyebrows: ['Profilo', 'Percorso', 'Strumenti', 'Base', 'Contatto'],
-        heroKicker: 'Ingegnere AI • Deep Learning • R&S',
+        heroKicker: 'CTO • Ingegnere di Ricerca AI • Deep Learning',
         heroPrimary: 'Contattami',
         heroSecondary: 'Scarica PDF',
         contactLabels: {
             email: 'Email',
-            location: 'Localita',
+            location: 'Località',
             dob: 'Anno di nascita',
             linkedin: 'LinkedIn',
             github: 'GitHub'
@@ -79,10 +79,10 @@ const UI_TEXT = {
             github: 'Vedi GitHub'
         },
         stats: [
-            { value: '94%', label: 'Accuratezza nella classificazione dei segnali' },
-            { value: '96%', label: 'Accuratezza nel filtro dei messaggi' },
-            { value: '30%', label: 'Miglioramento dell efficienza di elaborazione' },
-            { value: '3+', label: 'Anni in AI, backend e R&S' }
+            { value: '10/10', label: 'Voto Tesi Magistrale – con Lode' },
+            { value: '96%', label: 'Accuratezza nel filtraggio dei messaggi' },
+            { value: '94%', label: 'Accuratezza nella classificazione dei gesti' },
+            { value: '4+', label: 'Anni in ricerca e ingegneria AI' }
         ],
         footer: '© 2026 Sobhan Fooladi Mahani. Progettato per chiarezza, velocita e ottima ingegneria.'
     }
@@ -593,7 +593,7 @@ function update3DSceneTheme(theme) {
 
     const palette = theme === 'dark'
         ? [0x7dd3fc, 0xf59e0b, 0x34d399]
-        : [0x2563eb, 0xf97316, 0x059669];
+        : [0xb45309, 0x0369a1, 0x047857];
 
     const colors = particleSystem.geometry.attributes.color.array;
     for (let i = 0; i < colors.length; i += 3) {

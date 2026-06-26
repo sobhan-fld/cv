@@ -1,7 +1,7 @@
 {
     "profilePicture": "profile.png",
     "fullName": "Sobhan Fooladi Mahani",
-    "title": "INGENIERO DE IA Y DEEP LEARNING | INVESTIGADOR EN ML E I+D",
+    "title": "INGENIERO DE INVESTIGACIÓN EN IA | TELECOMUNICACIONES Y DEEP LEARNING",
     "contact": {
         "email": "fooladi.sobhan@outlook.com",
         "address": "Barcelona, España",
@@ -10,82 +10,90 @@
         "github": "https://github.com/sobhan-fld"
     },
     "objective": [
-        "Ingeniero de IA y Deep Learning con experiencia en la construcción de sistemas de ML de extremo a extremo, el despliegue de pipelines multilingües basados en LLMs y el desarrollo de modelos de aprendizaje profundo eficientes para aplicaciones reales. Sólida base en NLP/LLMs, desarrollo de modelos con PyTorch e ingeniería de pipelines de ML en entornos cloud y edge. Actualmente realiza el Trabajo Fin de Máster en el CTTC sobre el perfilado energético y de rendimiento de modelos de deep learning en hardware heterogéneo. Motivado para trabajar en puestos de investigación, ingeniería de ML e I+D combinando aprendizaje profundo, eficiencia y despliegue práctico."
+        "Ingeniero de IA y Deep Learning con sólida formación en Ingeniería de Telecomunicaciones y reciente graduado de Máster con las máximas calificaciones académicas (10/10 en la tesis). Apasionado por acercar la investigación de vanguardia en IA a aplicaciones de software escalables y listas para producción. Aporta experiencia integral en desarrollo de extremo a extremo: desde el diseño de modelos de ML energéticamente eficientes, sistemas GenAI y pipelines LLM-RAG, hasta la creación de plataformas full-stack robustas en Python y React. Historial demostrado en benchmarking reproducible, orquestación basada en agentes y optimización de algoritmos de deep learning intensivos en hardware heterogéneo edge y servidor. Actualmente ejerce como CTO, aplicando una trayectoria técnica multidisciplinar para impulsar la estrategia de arquitectura y desarrollar productos digitales inteligentes y altamente optimizados."
     ],
     "experience": [
         {
-            "position": "Investigador de Trabajo Fin de Máster – IA Sostenible (Grupo SAI) – Tiempo parcial",
-            "location": "CTTC – Centre Tecnològic de Telecomunicacions de Catalunya, Barcelona",
-            "period": "Oct 2025 – Presente",
+            "position": "CTO y Desarrollador Full-Stack",
+            "location": "SpainU | Lanzadera (Marina de Empresas), Valencia",
+            "period": "May 2026 – Presente",
             "responsibilities": [
-                "Investigación sobre deep learning eficiente en energía, perfilando los costes de entrenamiento/inferencia y las emisiones de CO2 en hardware heterogéneo (Jetson Nano, GPUs de portátil y servidores).",
-                "Evaluación comparativa de modelos CNN, LSTM/GRU y de aprendizaje contrastivo para tareas de imagen y series temporales bajo distintos ajustes de entrenamiento.",
-                "Diseño de campañas de medida utilizando CodeCarbon y CarbonTracker para evaluar el uso de GPU/CPU/RAM y el comportamiento de escalado energético.",
-                "Despliegue de modelos en dispositivos edge para estudiar restricciones de tiempo de ejecución, límites de memoria y efectos del tamaño de batch.",
-                "Exploración de técnicas de optimización (aprendizaje contrastivo, reservoir computing, selección de coresets) para reducir el coste de entrenamiento manteniendo la precisión.",
-                "Desarrollo de una herramienta interna en CTTC para automatizar pipelines de entrenamiento de modelos y registrar el consumo energético y las emisiones de CO2 durante los experimentos. GitHub: https://github.com/sobhan-fld/SustainVision"
+                "Arquitectura y desarrollo de una plataforma nueva de extremo a extremo como líder técnico de la empresa.",
+                "Construcción de backends escalables en Python y frontends interactivos y responsivos en React/JavaScript.",
+                "Diseño de arquitectura de aplicaciones, gestión de flujos de despliegue y liderazgo en la toma de decisiones tecnológicas en el ecosistema de la aceleradora Lanzadera."
             ]
         },
         {
-            "position": "Ingeniero de IA y PLN (Freelance)",
+            "position": "Investigador de Tesis de Máster – IA Sostenible (SAI), Tiempo parcial",
+            "location": "CTTC – Centre Tecnològic de Telecomunicacions de Catalunya, Barcelona | Supervisores: Dr. Roberto Pereira, Dr. Paolo Dini",
+            "period": "Oct 2025 – May 2026",
+            "responsibilities": [
+                "Investigación avanzada sobre deep learning eficiente en energía, obteniendo la puntuación perfecta de 10/10 en la presentación de la tesis de Máster.",
+                "Perfilado de costes de entrenamiento/inferencia y emisiones de CO₂ en hardware heterogéneo (Jetson, GPUs de portátil, nodos servidor).",
+                "Evaluación comparativa de modelos CNN, LSTM/GRU y de aprendizaje contrastivo para tareas de imagen y series temporales bajo diversas configuraciones de entrenamiento.",
+                "Diseño de campañas de medición con CodeCarbon y despliegue de modelos en dispositivos edge para estudiar restricciones de tiempo de ejecución, límites de memoria y efectos del tamaño de batch.",
+                "Mejora de la estabilidad de MobileNet/EfficientNet en hardware limitado, alcanzando más del 60% de precisión en CIFAR-100 con recetas de entrenamiento conscientes de los recursos.",
+                "Desarrollo de una herramienta interna en Python para automatizar pipelines de entrenamiento de ML, seguimiento de experimentos y análisis de resultados. GitHub: SustainVision"
+            ]
+        },
+        {
+            "position": "Ingeniero de IA y PLN, Freelance",
             "location": "Moodest, Techno Campus, Mataró, Barcelona",
-            "period": "Abr 2025 – Presente",
+            "period": "Abr 2025 – Feb 2026",
             "responsibilities": [
-                "Desarrollo de pipelines de LLM y PLN multilingües (catalán/español/inglés) para analítica de bienestar laboral y comunicaciones.",
-                "Despliegue de modelos Llama 3.2 en Hugging Face Inference Endpoints sobre AWS e integración en el pipeline de PLN en producción de Moodest, con gestión automática de contexto y enrutamiento de agentes.",
-                "Diseño de módulos de orquestación basados en agentes y gestión de contexto que mejoran la precisión de procesamiento y la fiabilidad del razonamiento.",
-                "Alcanzó un 96 % de precisión en el filtrado de mensajes y un 91 % en la predicción de puntuaciones de engagement utilizando embeddings de transformers combinados con modelos XGBoost.",
-                "Implementación de preprocesamiento respetuoso con la privacidad y APIs REST listas para producción que dan soporte a los servicios de IA internos de Moodest."
+                "Desarrollo de pipelines LLM y PLN multilingüe en catalán, español e inglés para analítica de bienestar laboral y comunicaciones.",
+                "Integración de componentes conversacionales basados en Llama para interacción humano-máquina multilingüe, incluyendo gestión de contexto, lógica de enrutamiento y servicios de inferencia por API.",
+                "Alcanzó un 96% de precisión en el filtrado de mensajes y un 91% en la predicción de engagement mediante embeddings de transformers y modelos XGBoost.",
+                "Construcción de pipelines de preprocesamiento conformes con la privacidad y APIs REST listas para producción para los servicios de IA internos.",
+                "Implementación de pruebas unitarias y de integración con Pytest para garantizar despliegues fiables en entornos cloud y edge."
             ]
         },
         {
-            "position": "Ingeniero de IA y Backend (I+D – Proyecto MAXSENS) – Jornada completa",
-            "location": "Imaz Tech – Barcelona, España",
+            "position": "Ingeniero de IA y Backend (I+D – Proyecto MAXSENS), Jornada completa",
+            "location": "Imaz Tech, Barcelona",
             "period": "Ago 2023 – Ago 2025",
             "responsibilities": [
-                "Desarrolló APIs backend con Flask para el procesamiento en tiempo real de datos de EMG y movimiento, habilitando pipelines de IA modulares y escalables.",
-                "Diseñó y entrenó modelos CNN y LSTM, logrando un 94 % de precisión en la clasificación de gestos a partir de señales fisiológicas de alta dimensión.",
-                "Mejoró la eficiencia del procesamiento de señales en un 30 % mediante técnicas optimizadas de filtrado y extracción de características.",
-                "Automatizó la generación de informes analíticos (CSV, PDF, JPG), reduciendo en más del 60 % el tiempo de manejo manual de datos.",
-                "Implementó funciones de detección de postura y movimiento que redujeron en un 40 % los errores de ejecución de ejercicios.",
-                "Colaboró con equipos clínicos y de producto para alinear los resultados de ML con casos de uso reales."
+                "Desarrollo de APIs con Flask para el procesamiento en tiempo real de datos de EMG y movimiento, habilitando pipelines de IA modulares y escalables.",
+                "Diseño y entrenamiento de modelos CNN y LSTM con un 94% de precisión en la clasificación de gestos sobre señales fisiológicas de alta dimensión.",
+                "Mejora de la eficiencia del procesamiento de señales en un 30% mediante técnicas optimizadas de filtrado y extracción de características.",
+                "Automatización de la generación de informes analíticos en CSV, PDF y JPG, reduciendo el trabajo manual en un 60%.",
+                "Implementación de funciones de detección de postura y movimiento que redujeron los errores de ejecución de ejercicios en un 40%.",
+                "Colaboración con equipos clínicos y de producto para alinear los resultados de ML con casos de uso reales."
             ]
         },
         {
             "position": "Ingeniero de Software y Product Owner Técnico",
-            "location": "SaminCoin – Teherán",
+            "location": "SaminCoin, Teherán",
             "period": "Oct 2021 – Dic 2022",
             "responsibilities": [
-                "Diseñó y mantuvo APIs RESTful usando Python y Django para la detección de fraude y la clasificación de transacciones en una plataforma de criptomonedas.",
-                "Creó diagramas UML y diseños de sistema detallados, mejorando la comunicación entre equipos y reduciendo los ciclos de desarrollo en un 25 %. ",
-                "Lideró la planificación del roadmap de producto y la ejecución de sprints, contribuyendo a reducir el tiempo de lanzamiento de funcionalidades en un 40 %. ",
-                "Trabajó estrechamente con el equipo de UI/UX para optimizar los flujos de incorporación de usuarios, mejorando la experiencia inicial y la satisfacción de los usuarios.",
-                "Introdujo prácticas ágiles y mayor visibilidad en los sprints, permitiendo una mejor priorización y alineación en todo el equipo técnico."
+                "Diseño y mantenimiento de APIs REST en Python/Django para detección de fraude y clasificación de transacciones.",
+                "Creación de arquitectura de sistemas y diagramas UML para mejorar la comunicación entre equipos.",
+                "Contribución a la planificación del roadmap de producto y la ejecución de sprints en un entorno de producto multifuncional.",
+                "Colaboración con los equipos de UI/UX para mejorar los flujos de incorporación de usuarios iniciales."
             ]
         }
     ],
     "education": [
-        "Máster en Telecomunicaciones – Especialización en Deep Learning para el procesamiento multimedia, Universitat Politècnica de Catalunya (UPC), Barcelona – 2023 – 2025",
-        "Grado en Ingeniería en Tecnologías de la Información, Universidad Azad de Karaj – 2015 – 2020"
+        "Máster en Ingeniería de Telecomunicaciones (MATT) – Especialización en Deep Learning para Procesamiento Multimedia | Universitat Politècnica de Catalunya (UPC), Barcelona | 2023 – 2025 | Tesis 10/10, Máximas Calificaciones Académicas",
+        "Grado en Ingeniería en Tecnologías de la Información | Universidad Azad de Karaj | 2015 – 2020"
     ],
     "skills": [
-        "Lenguajes de Programación: Python, Bash",
-        "Deep Learning y Aprendizaje Automático: PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib, CNNs, LSTMs/GRUs, transfer learning, aprendizaje contrastivo, aprendizaje auto-supervisado, evaluación de modelos",
-        "PLN y LLMs: Pipelines de Hugging Face, integración de LLMs multilingües, modelos Llama, embeddings, clasificación de texto, análisis de sentimiento y modelado de temas",
-        "Perfilado Energético y de Rendimiento: CodeCarbon, perfilado de GPU/CPU/RAM, análisis de eficiencia en dispositivos edge y servidores",
-        "Backend e Infraestructura: APIs con Flask, servicios RESTful, AWS Lambda/API Gateway/S3, endpoints dockerizados, sistemas Linux, diseño de microservicios",
-        "Herramientas y Plataformas: Git, Linux, Jupyter, IDEs JetBrains (por ejemplo, PyCharm), VS Code, Google Colab",
-        "Conceptos y Técnicas: Deep learning, aprendizaje supervisado y auto-supervisado, análisis de series temporales, despliegue de modelos, despliegue en la nube, optimización de modelos, data pipelines, diseño experimental, workflows reproducibles"
+        "Lenguajes y Tecnologías Core: Python, JavaScript, C++, Bash, HTML5/CSS3, SQL, Git, Linux (entornos Debian/Ubuntu)",
+        "Deep Learning e Investigación en IA: PyTorch, Scikit-learn, NumPy, Pandas, Matplotlib; CNNs, LSTMs/GRUs, transfer learning, aprendizaje contrastivo, self-supervised learning, evaluación de modelos",
+        "Sistemas GenAI y PLN: Hugging Face, modelos Llama, PLN multilingüe, embeddings de transformers, pipelines LLM-RAG, almacenes de vectores, flujos de trabajo agénticos",
+        "Ingeniería Full-Stack y Backend: React, JavaScript (frontend); Django, Flask (backend), REST APIs, procesamiento asíncrono, arquitectura de aplicaciones, pipelines de ingestión",
+        "IA Eficiente y Sistemas Edge: CodeCarbon, perfilado GPU/CPU/RAM, benchmarking hardware-aware, optimización con recursos limitados (edge vs. servidor)",
+        "Testing, Infraestructura y CI/CD: Pytest, pruebas unitarias/integración, pruebas de API; Docker, endpoints cloud, orquestación de workflows, documentación Sphinx/OpenAPI"
     ],
     "languages": [
         "Inglés: Fluido",
-        "Español: A1 – Principiante",
+        "Español: A2",
         "Persa (Farsi): Nativo"
     ],
     "additionalInfo": {
         "workAuthorization": "Autorizado para trabajar y hacer prácticas en España",
         "portfolio": "https://sobhan-fld.github.io/cv/",
-        "interests": "Investigación en deep learning, sistemas LLM, ML eficiente, edge AI, análisis de señales, desarrollo y programación, creación de prototipos, videojuegos, lectura de novelas de misterio, filosofía tecnológica y retos de resolución de problemas"
+        "interests": "Sistemas GenAI, deep learning eficiente, edge AI, análisis de señales, sistemas en red inteligentes, ajedrez"
     },
     "translations": {
         "contact": "Información de Contacto",
