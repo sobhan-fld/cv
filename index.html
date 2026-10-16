@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobhan Fooladi Mahani | Portfolio</title>
     <meta name="description" content="Portfolio of Sobhan Fooladi Mahani, AI and deep learning engineer building efficient, multilingual ML systems.">
+    <script>
+        // Before first paint: the theme (no dark flash for light-mode visitors) and the layout.
+        // Large windows get scenes; everything else flows. Keep in sync with SCENES_QUERY in scripts.js.
+        (function () {
+            var root = document.documentElement;
+            try {
+                root.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+            } catch (error) {}
+            var scenes = window.matchMedia('(min-width: 1024px) and (min-height: 680px)').matches;
+            root.classList.add('js', scenes ? 'scenes' : 'flow');
+            setTimeout(function () { root.classList.add('is-ready'); }, 2500);
+            // If scripts.js never takes over, fall back to a plain scrolling page.
+            setTimeout(function () {
+                if (!window.__site) {
+                    root.classList.remove('scenes');
+                    root.classList.add('flow');
+                }
+            }, 5000);
+        })();
+    </script>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas id="canvas3d" aria-hidden="true"></canvas>
-
-    <div class="page-noise" aria-hidden="true"></div>
+    <div class="backdrop" aria-hidden="true">
+        <div class="glow glow--a"><span></span></div>
+        <div class="glow glow--b"><span></span></div>
+        <div class="grain"></div>
+    </div>
 
     <div class="scroll-progress-bar" aria-hidden="true">
         <div class="scroll-progress-fill" id="scrollProgressFill"></div>
@@ -26,28 +48,38 @@
         <div class="indicator" data-section="3"></div>
         <div class="indicator" data-section="4"></div>
         <div class="indicator" data-section="5"></div>
+        <div class="indicator" data-section="6"></div>
     </div>
 
     <nav class="nav-container">
         <a href="#" class="nav-brand" data-section="0" aria-label="Go to home">SFM</a>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
+            <span class="nav-pill" aria-hidden="true"></span>
             <a href="#" class="nav-link active" data-section="0">Home</a>
             <a href="#" class="nav-link" data-section="1">About</a>
             <a href="#" class="nav-link" data-section="2">Experience</a>
             <a href="#" class="nav-link" data-section="3">Skills</a>
-            <a href="#" class="nav-link" data-section="4">Education</a>
-            <a href="#" class="nav-link" data-section="5">Contact</a>
+            <a href="#" class="nav-link" data-section="4">GitHub</a>
+            <a href="#" class="nav-link" data-section="5">Education</a>
+            <a href="#" class="nav-link" data-section="6">Contact</a>
         </div>
         <div class="nav-actions">
             <div class="language-switcher" id="languageSwitcher" aria-label="Language selector">
+                <span class="language-thumb" aria-hidden="true"></span>
                 <button type="button" class="language-option active" data-lang="en">EN</button>
                 <button type="button" class="language-option" data-lang="es">ES</button>
                 <button type="button" class="language-option" data-lang="it">IT</button>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <span class="theme-icon">◐</span>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+                <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
             </button>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+            <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -56,28 +88,28 @@
     </nav>
 
     <main class="content-container" id="contentContainer">
-        <section class="content-section visible" data-section="0">
+        <section class="content-section is-current" id="home" data-section="0" tabindex="-1">
             <div class="section-content-wrapper hero-shell">
                 <div class="hero-content">
                     <div class="hero-copy">
-                        <p class="hero-kicker" id="heroKicker">AI Engineer • Deep Learning • R&amp;D</p>
+                        <p class="hero-kicker hero-reveal" id="heroKicker" style="--d: 0ms">AI Engineer • Deep Learning • R&amp;D</p>
                         <h1 class="hero-title" id="heroName">
-                            <span class="title-line">Sobhan</span>
-                            <span class="title-line">Fooladi Mahani</span>
+                            <span class="title-line"><span>Sobhan</span></span>
+                            <span class="title-line"><span>Fooladi Mahani</span></span>
                         </h1>
-                        <p class="hero-subtitle" id="heroTitle">AI &amp; Deep Learning Engineer</p>
-                        <p class="hero-description" id="heroDescription">
+                        <p class="hero-subtitle hero-reveal" id="heroTitle" style="--d: 380ms">AI &amp; Deep Learning Engineer</p>
+                        <p class="hero-description hero-reveal" id="heroDescription" style="--d: 470ms">
                             Building efficient machine learning systems that turn research into reliable products.
                         </p>
-                        <div class="hero-buttons">
-                            <a href="#" class="btn btn-primary scroll-to-section" data-target="5">Get In Touch</a>
+                        <div class="hero-buttons hero-reveal" style="--d: 560ms">
+                            <a href="#" class="btn btn-primary scroll-to-section" data-target="6">Get In Touch</a>
                             <a href="assets/Sobhan_Fooladi_Mahani_CV.pdf" target="_blank" rel="noreferrer" class="btn btn-secondary" id="downloadButton">Download PDF</a>
                         </div>
                     </div>
                     <aside class="hero-spotlight">
                         <div class="profile-container">
                             <div class="profile-image-wrapper">
-                                <img src="assets/profile.png" alt="Profile picture of Sobhan Fooladi Mahani" class="profile-image" id="profileImage">
+                                <img src="assets/profile.png" alt="Profile picture of Sobhan Fooladi Mahani" class="profile-image" id="profileImage" width="360" height="360">
                             </div>
                         </div>
                     </aside>
@@ -85,33 +117,38 @@
             </div>
         </section>
 
-        <section class="content-section" data-section="1">
+        <section class="content-section" id="about" data-section="1" tabindex="-1">
             <div class="section-content-wrapper">
+                <div class="section-header">
+                    <h2 class="section-title" id="aboutTitle">About</h2>
+                    <div class="section-divider"></div>
+                </div>
                 <div class="section-content">
                     <div class="about-card">
+                        <p class="about-summary reveal" id="aboutSummary"></p>
                         <div class="stats-grid" id="statsGrid"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="content-section" data-section="2">
-            <div class="section-content-wrapper">
+        <section class="content-section" id="experience" data-section="2" tabindex="-1">
+            <div class="section-content-wrapper experience-layout">
                 <div class="section-header">
-                    <p class="section-eyebrow" id="experienceEyebrow">Journey</p>
                     <h2 class="section-title" id="experienceTitle">Experience</h2>
                     <div class="section-divider"></div>
                 </div>
-                <div class="section-content">
+                <ol class="role-list reveal" id="roleList"></ol>
+                <div class="role-detail reveal" id="roleDetail"></div>
+                <div class="section-content timeline-wrap">
                     <div class="timeline" id="experienceTimeline"></div>
                 </div>
             </div>
         </section>
 
-        <section class="content-section" data-section="3">
+        <section class="content-section" id="skills" data-section="3" tabindex="-1">
             <div class="section-content-wrapper">
                 <div class="section-header">
-                    <p class="section-eyebrow" id="skillsEyebrow">Toolkit</p>
                     <h2 class="section-title" id="skillsTitle">Skills &amp; Technologies</h2>
                     <div class="section-divider"></div>
                 </div>
@@ -121,10 +158,21 @@
             </div>
         </section>
 
-        <section class="content-section" data-section="4">
+        <section class="content-section" id="github" data-section="4" tabindex="-1">
             <div class="section-content-wrapper">
                 <div class="section-header">
-                    <p class="section-eyebrow" id="educationEyebrow">Foundation</p>
+                    <h2 class="section-title" id="githubTitle">GitHub Activity</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="section-content">
+                    <div class="skyline-host reveal" id="githubSkyline" aria-busy="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="education" data-section="5" tabindex="-1">
+            <div class="section-content-wrapper">
+                <div class="section-header">
                     <h2 class="section-title" id="educationTitle">Education</h2>
                     <div class="section-divider"></div>
                 </div>
@@ -134,28 +182,29 @@
             </div>
         </section>
 
-        <section class="content-section" data-section="5">
+        <section class="content-section" id="contact" data-section="6" tabindex="-1">
             <div class="section-content-wrapper">
                 <div class="section-header">
-                    <p class="section-eyebrow" id="contactEyebrow">Connect</p>
                     <h2 class="section-title" id="contactTitle">Get In Touch</h2>
                     <div class="section-divider"></div>
                 </div>
                 <div class="section-content">
-                    <div class="contact-card">
+                    <div class="contact-card reveal">
                         <div class="contact-info" id="contactInfo"></div>
                         <div class="contact-actions" id="contactActions"></div>
                     </div>
                 </div>
             </div>
+            <footer class="footer">
+                <p id="footerText">&copy; 2026 Sobhan Fooladi Mahani. Built for clarity, speed, and good engineering.</p>
+            </footer>
         </section>
     </main>
 
-    <footer class="footer">
-        <p id="footerText">&copy; 2026 Sobhan Fooladi Mahani. Built for clarity, speed, and good engineering.</p>
-    </footer>
+    <!-- Scenes: the sections stay put; this gives the page its scroll length. -->
+    <div id="sceneTrack" aria-hidden="true"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="skyline.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
